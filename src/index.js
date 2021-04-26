@@ -6,12 +6,15 @@ import { createStore, applyMiddleware } from 'redux';
 import promise from 'redux-promise';
 import reducers from './reducers';
 import App from './App';
+import { fetchTreflePlantInformation, fetchPlantNetPlantIdentification } from './actions';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+const store = createStoreWithMiddleware(reducers);
+store.dispatch(fetchPlantNetPlantIdentification('test'));
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={createStoreWithMiddleware(reducers)}>
+    <Provider store={store}>
       <App />
     </Provider>
   </React.StrictMode>,
