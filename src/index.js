@@ -7,6 +7,7 @@ import promise from 'redux-promise';
 import reducers from './reducers';
 import App from './App';
 import { fetchTreflePlantInformation, fetchPlantNetPlantIdentification } from './actions';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 const store = createStoreWithMiddleware(reducers);
