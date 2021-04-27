@@ -1,6 +1,8 @@
 import axios from "axios";
 export const FETCH_PLANT_NET_PLANT_IDENTIFICATION = "FETCH_PLANT_NET_PLANT_IDENTIFICATION";
 export const FETCH_TREFLE_PLANT_INFORMATION = "FETCH_TREFLE_PLANT_INFORMATION";
+export const UPDATE_USER_IMAGE = 'UPDATE_USER_IMAGE';
+export const FETCH_TREFLE_INFO_FOR_ID = 'FETCH_TREFLE_INFO_FOR_ID';
 
 // Sends a get request to plant net for a plant identification based upon remote image urls
 export const fetchPlantNetPlantIdUrl = (imageUrlsForPlant, organsDisplayedinImages, guessedCategoryForPlant) => {
@@ -19,7 +21,7 @@ export const fetchPlantNetPlantIdUrl = (imageUrlsForPlant, organsDisplayedinImag
 
 
 // Sends a post request to plant net for a plant identification based upon uploaded local images
-export const fetchPlantNetPlantIdLocal = (images, organsDisplayedinImages, guessedCategoryForPlant) => {
+export const fetchPlantNetPlantIdLocal = (images, organsDisplayedinImages, userImage, guessedCategoryForPlant) => {
   const baseUrl = `https://my-api.plantnet.org/v2/identify/all?api-key=${process.env.REACT_APP_PLANT_NET_API_KEY}`;
   let form = new FormData();
   form.append('organs', organsDisplayedinImages[0]);
@@ -32,10 +34,25 @@ export const fetchPlantNetPlantIdLocal = (images, organsDisplayedinImages, guess
   }
 }
 
+//Sends a get request to trefle for plant information (Right now it returns all plants)
+//TODO: Figure out the different types of requests we will need to make and set up an action for each one.
+export const fetchTrefleInfoForId = (scientificName) => {
+  // Search for a plant by common name, scientific name, or other input field
+
+  const idToRetrieve = scientificName.toLowerCase().replace(' ', '-')
+  console.log(idToRetrieve);
+  debugger;
+  const url = `https://trefle.io/api/v1/species/${idToRetrieve}?token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s`
+  const request = axios.get(url);
+  return {
+    type: FETCH_TREFLE_INFO_FOR_ID,
+    payload: request
+  }
+}
 
 //Sends a get request to trefle for plant information (Right now it returns all plants)
 //TODO: Figure out the different types of requests we will need to make and set up an action for each one.
-export const fetchTreflePlantInformation = (searchTerm) => {
+export const fetchTrefleGameInformation = (searchTerm) => {
   // Search for a plant by common name, scientific name, or other input field
   // https://trefle.io/api/v1/plants/search?q=${searchTerm}&token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s
   const url = `https://trefle.io/api/v1/plants?token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s`
@@ -45,3 +62,10 @@ export const fetchTreflePlantInformation = (searchTerm) => {
     payload: request
   }
 }
+
+export const updateUserImage = (imageUrl) => {
+  return {
+    type: UPDATE_USER_IMAGE,
+    payload: imageUrl
+  }
+};
