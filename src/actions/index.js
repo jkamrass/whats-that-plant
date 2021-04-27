@@ -2,7 +2,7 @@ import axios from "axios";
 export const FETCH_PLANT_NET_PLANT_IDENTIFICATION = "FETCH_PLANT_NET_PLANT_IDENTIFICATION";
 export const FETCH_TREFLE_PLANT_INFORMATION = "FETCH_TREFLE_PLANT_INFORMATION";
 
-
+// Sends a get request to plant net for a plant identification based upon remote image urls
 export const fetchPlantNetPlantIdentificationForRemoteImages = (imageUrlsForPlant, organsDisplayedinImages, guessedCategoryForPlant) => {
   const baseUrl = `https://my-api.plantnet.org/v2/identify/all?api-key=${process.env.REACT_APP_PLANT_NET_API_KEY}`;
   const encodedImageUrls = imageUrlsForPlant.map((imageUrl) => encodeURIComponent(imageUrl));
@@ -17,6 +17,7 @@ export const fetchPlantNetPlantIdentificationForRemoteImages = (imageUrlsForPlan
   }
 }
 
+// Sends a post request to plant net for a plant identification based upon uploaded local images
 export const fetchPlantNetPlantIdentificationForLocalImages = (images, organsDisplayedinImages, guessedCategoryForPlant) => {
   debugger;
   const baseUrl = `https://my-api.plantnet.org/v2/identify/all?api-key=${process.env.REACT_APP_PLANT_NET_API_KEY}`;
@@ -32,7 +33,11 @@ export const fetchPlantNetPlantIdentificationForLocalImages = (images, organsDis
   }
 }
 
+//Sends a get request to trefle for plant information (Right now it returns all plants)
+//TODO: Figure out the different types of requests we will need to make and set up an action for each one.
 export const fetchTreflePlantInformation = (searchTerm) => {
+  // Search for a plant by common name, scientific name, or other input field
+  // https://trefle.io/api/v1/plants/search?q=${searchTerm}&token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s
   const url = `https://trefle.io/api/v1/plants?token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s`
   const request = axios.get(url);
   return {
