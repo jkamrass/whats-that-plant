@@ -17,6 +17,7 @@ export const fetchPlantNetPlantIdentificationForRemoteImages = (imageUrlsForPlan
   }
 }
 
+
 // Sends a post request to plant net for a plant identification based upon uploaded local images
 export const fetchPlantNetPlantIdentificationForLocalImages = (images, organsDisplayedinImages, guessedCategoryForPlant) => {
   debugger;
@@ -32,6 +33,7 @@ export const fetchPlantNetPlantIdentificationForLocalImages = (images, organsDis
     payload: request
   }
 }
+
 
 //Sends a get request to trefle for plant information (Right now it returns all plants)
 //TODO: Figure out the different types of requests we will need to make and set up an action for each one.
