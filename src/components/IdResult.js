@@ -11,6 +11,14 @@ const IdResult = () => {
       <div>Loading...</div>
     )
   }
+
+  const callTrefle = () => {
+    dispatch(fetchTrefleInfoForId(idResults?.scientificName))
+  }
+  // if(Object.keys(idResults).length !== 0) {
+  //   callTrefle();
+  // }
+
   // if(idResults) {
   //   dispatch(fetchTrefleInfoForId(encodeURIComponent(idResults?.scientificName)))
   // }
@@ -29,9 +37,6 @@ const IdResult = () => {
     }
   }
 
-  const callTrefle = () => {
-    dispatch(fetchTrefleInfoForId(idResults?.scientificName))
-  }
 
   console.log(idResults);
   return (
@@ -50,7 +55,7 @@ const IdResult = () => {
           </h3>
         </div>
         <div className="col-md-5">
-          <img src={idResults?.primaryImage} alt='' width={500}/>
+          <img src={idResults?.primaryImage} alt='Loading Image...' width={500}/>
         </div>
       </div>
       <div className="row">
