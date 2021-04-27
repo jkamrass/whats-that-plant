@@ -1,15 +1,22 @@
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useState } from 'react';
+import { fetchPlantNetPlantIdentification } from '../actions'
 
 const IdUrl = () => {
-    const [query, setQuery] = useState(null);
+    const [image, setImage] = useState(null);
+    const [type, setType] = useState('other')
+    const dispatch = useDispatch();
     
     const handleChange = (e) => {
-      setQuery(e.target.value);
+      setImage(e.target.value);
+    }
+
+    const handleType = (e) => {
+      setType(e.target.value);
     }
   
     const uploadLocal = () => {
-      console.log('uploading');
-      console.log(query)
+      dispatch(fetchPlantNetPlantIdentification(image, type));
     }
   return (
     <>
@@ -31,6 +38,14 @@ const IdUrl = () => {
             <div className="input-group mb-3">
               <input type="text" className="form-control" placeholder="image location (url)"    aria-label="image url" aria-describedby="basic-addon2" onChange={handleChange}/>
             </div>
+            <select className="custom-select" id="inputGroupSelect01" onChange={handleType} defaultValue='a picture of?'>
+              <option selected>a picture of?</option>
+              <option value="leaf">leaf</option>
+              <option value="flower">flower</option>
+              <option value="fruit">fruit</option>
+              <option value="habit">habit</option>
+              <option value="other">other</option>
+            </select>
             <div className="input-group-append">
               <button className="btn btn-outline-secondary" type="button" onClick={uploadLocal}>Submit</button>
             </div>
@@ -40,7 +55,7 @@ const IdUrl = () => {
 
       <div className='row'>
         <div className='col-sm-6 offset-md-3'>
-          <img src={query} alt='' width={600}/>
+          <img src={image} alt='' width={600}/>
         </div>
       </div>
     </>

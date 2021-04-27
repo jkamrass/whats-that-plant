@@ -1,15 +1,23 @@
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useState } from 'react';
+import { fetchPlantNetPlantIdentification } from '../actions'
 
 const IdLocal = () => {
-  const [file, setFile] = useState(null);
-  
-  const handleChange = (e) => {
-    setFile(URL.createObjectURL(e.target.files[0]));
-  }
+    const [image, setImage] = useState(null);
+    const [type, setType] = useState('other')
+    const dispatch = useDispatch();
+    
+    const handleChange = (e) => {
+      setImage(e.target.value);
+    }
 
-  const uploadLocal = () => {
-    console.log('uploading');
-  }
+    const handleType = (e) => {
+      setType(e.target.value);
+    }
+  
+    const uploadLocal = () => {
+      dispatch(fetchPlantNetPlantIdentification(image, type));
+    }
 
   return (
     <>
@@ -35,12 +43,22 @@ const IdLocal = () => {
               <input type='file' onChange={handleChange} id='inputGroupFile01'/>
               <label className="custom-file-label" htmlFor="inputGroupFile01">Choose file</label>
             </div>
+            <select className="custom-select" id="inputGroupSelect01" onChange={handleType} defaultValue='a picture of?'>
+              <option selected>a picture of?</option>
+              <option value="leaf">leaf</option>
+              <option value="flower">flower</option>
+              <option value="fruit">fruit</option>
+              <option value="habit">habit</option>
+              <option value="other">other</option>
+            </select>
+            <button className="btn btn-outline-secondary" type="button" onClick={uploadLocal}>Submit</button>
           </div>
         </div>
       </div>
+      
       <div className='row'>
         <div className='col-sm-6 offset-md-3'>
-          <img src={file} alt='' width={600}/>
+          <img src={image} alt='' width={600}/>
         </div>
       </div>
     </>
