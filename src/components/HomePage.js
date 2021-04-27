@@ -3,6 +3,7 @@ import MainMenu from './MainMenu';
 import IdMenu from './IdMenu';
 
 import QuizContainer from './QuizContainer';
+import IdContainer from './IdContainer';
 
 const MainPage = () => {
   return (
@@ -18,8 +19,8 @@ const MainPage = () => {
         <Route exact path='/'>
           <MainMenu/>
         </Route>
-        <Route path='/ID'>
-          <IdMenu/>
+        <Route path='/id'>
+          <IdContainer/>
         </Route>
         <Route path='/quiz'>
           <QuizContainer/>

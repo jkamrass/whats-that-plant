@@ -17,26 +17,14 @@ const IdMenu = () =>{
       </div>
       <div className='row'>
         <div className='col-sm-1 offset-md-5'>
-          <Link to='/ID/url'>
+          <Link to='/id/url'>
             <button className='btn btn-success btn-xl'>use photo url</button>
           </Link>
         </div>
         <div className='col-sm-2'>
-          <Link to='/ID/local'>
+          <Link to='/id/local'>
             <button className='btn btn-success btn-xl'>upload my own photo</button>
           </Link>
-        </div>
-      </div>
-      <div className = 'row'>
-        <div className='col-sm-8 offset-md-2'>
-          <Switch>
-            <Route exact path='/ID/local'>
-              <IdLocal/>
-            </Route>
-            <Route exact path='/ID/url'>
-              <IdUrl/>
-            </Route>
-          </Switch>
         </div>
       </div>
     </>
