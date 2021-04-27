@@ -17,6 +17,21 @@ export const fetchPlantNetPlantIdentificationForRemoteImages = (imageUrlsForPlan
   }
 }
 
+export const fetchPlantNetPlantIdentificationForLocalImages = (images, organsDisplayedinImages, guessedCategoryForPlant) => {
+  debugger;
+  const baseUrl = `https://my-api.plantnet.org/v2/identify/all?api-key=${process.env.REACT_APP_PLANT_NET_API_KEY}`;
+  let form = new FormData();
+  form.append('organs', organsDisplayedinImages[0]);
+  form.append('images', images[0])
+  //form.append('images', fs.createReadStream(images[i]));
+  debugger;
+  const request = axios.post(baseUrl, form);
+  return {
+    type: FETCH_PLANT_NET_PLANT_IDENTIFICATION,
+    payload: request
+  }
+}
+
 export const fetchTreflePlantInformation = (searchTerm) => {
   const url = `https://trefle.io/api/v1/plants?token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s`
   const request = axios.get(url);

@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchPlantNetPlantIdentificationForLocalImages } from '../actions/index';
 
 const IdLocal = () => {
   const [file, setFile] = useState(null);
+  const dispatch = useDispatch();
   
   const handleChange = (e) => {
     setFile(URL.createObjectURL(e.target.files[0]));
+    //dispatch(fetchPlantNetPlantIdentificationForLocalImages([e.target.files[0]], ['flower']))
   }
 
   const uploadLocal = () => {

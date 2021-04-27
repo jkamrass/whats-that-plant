@@ -6,12 +6,11 @@ const plantIdResultsReducer = (state={}, action) => {
       debugger;
       //Grabs the first and most likely returned object (Could return multiple if there are multiple possible matches in the future)
       const plantIdInfo = {
-        matchScore: action.payload.data,
+        matchScore: action.payload.data.results[0].score,
         scientificName: action.payload.data.results[0].species.scientificNameWithoutAuthor,
         commonNames: action.payload.data.results[0].species.commonNames,
         family: action.payload.data.results[0].species.family.scientificNameWithoutAuthor,
         genus: action.payload.data.results[0].species.genus.scientificNameWithoutAuthor,
-
       }
       return plantIdInfo;
     default:
