@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState } from 'react';
-import { fetchPlantNetPlantIdentification } from '../actions'
+import { fetchPlantNetPlantIdUrl } from '../actions'
+import { useHistory } from 'react-router-dom';
 
 const IdUrl = () => {
     const [image, setImage] = useState(null);
     const [type, setType] = useState('other')
     const dispatch = useDispatch();
+    const history = useHistory();
     
     const handleChange = (e) => {
       setImage(e.target.value);
@@ -16,8 +18,10 @@ const IdUrl = () => {
     }
   
     const uploadLocal = () => {
-      dispatch(fetchPlantNetPlantIdentification(image, type));
+      dispatch(fetchPlantNetPlantIdUrl([image], [type]));
+      history.push('/id/result');
     }
+
   return (
     <>
       <div className='row'>

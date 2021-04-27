@@ -3,7 +3,6 @@ import { FETCH_PLANT_NET_PLANT_IDENTIFICATION } from '../actions/index';
 const plantIdResultsReducer = (state={}, action) => {
   switch (action.type) {
     case FETCH_PLANT_NET_PLANT_IDENTIFICATION:
-      debugger;
       //Grabs the first and most likely returned object (TODO: Could change to return multiple if there are multiple possible matches in the future)
       const plantIdInfo = {
         matchScore: action.payload.data.results[0].score,

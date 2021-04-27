@@ -16,7 +16,7 @@ const MainMenu = () => {
       </div>
       <div className='row'>
         <div className='col-sm-1 offset-md-5'>
-          <Link to='/ID'>
+          <Link to='/id'>
             <button className='btn btn-success btn-xl'>ID a Plant</button>
           </Link>
         </div>

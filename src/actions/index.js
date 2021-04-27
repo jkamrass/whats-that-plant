@@ -3,7 +3,7 @@ export const FETCH_PLANT_NET_PLANT_IDENTIFICATION = "FETCH_PLANT_NET_PLANT_IDENT
 export const FETCH_TREFLE_PLANT_INFORMATION = "FETCH_TREFLE_PLANT_INFORMATION";
 
 // Sends a get request to plant net for a plant identification based upon remote image urls
-export const fetchPlantNetPlantIdentificationForRemoteImages = (imageUrlsForPlant, organsDisplayedinImages, guessedCategoryForPlant) => {
+export const fetchPlantNetPlantIdUrl = (imageUrlsForPlant, organsDisplayedinImages, guessedCategoryForPlant) => {
   const baseUrl = `https://my-api.plantnet.org/v2/identify/all?api-key=${process.env.REACT_APP_PLANT_NET_API_KEY}`;
   const encodedImageUrls = imageUrlsForPlant.map((imageUrl) => encodeURIComponent(imageUrl));
   const imagesPartOfRequestUrl = encodedImageUrls.reduce((imagesUrlPortion, imageUrl) => `${imagesUrlPortion}&images=${imageUrl}`, '');
@@ -19,14 +19,12 @@ export const fetchPlantNetPlantIdentificationForRemoteImages = (imageUrlsForPlan
 
 
 // Sends a post request to plant net for a plant identification based upon uploaded local images
-export const fetchPlantNetPlantIdentificationForLocalImages = (images, organsDisplayedinImages, guessedCategoryForPlant) => {
-  debugger;
+export const fetchPlantNetPlantIdLocal = (images, organsDisplayedinImages, guessedCategoryForPlant) => {
   const baseUrl = `https://my-api.plantnet.org/v2/identify/all?api-key=${process.env.REACT_APP_PLANT_NET_API_KEY}`;
   let form = new FormData();
   form.append('organs', organsDisplayedinImages[0]);
   form.append('images', images[0])
   //form.append('images', fs.createReadStream(images[i]));
-  debugger;
   const request = axios.post(baseUrl, form);
   return {
     type: FETCH_PLANT_NET_PLANT_IDENTIFICATION,

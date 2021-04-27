@@ -1,14 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState } from 'react';
-import { fetchPlantNetPlantIdentificationForLocalImages } from '../actions/index';
+import { fetchPlantNetPlantIdLocal } from '../actions/index';
+import { useHistory } from 'react-router-dom';
 
 const IdLocal = () => {
     const [image, setImage] = useState(null);
-    const [type, setType] = useState('other')
+    const [previewImage, setPreviewImage] = useState(null);
+    const [type, setType] = useState('other');
+    const history = useHistory();
     const dispatch = useDispatch();
     
     const handleChange = (e) => {
-      setFile(URL.createObjectURL(e.target.files[0]));
+      setImage(e.target.files[0]);
+      setPreviewImage(URL.createObjectURL(e.target.files[0]))
     }
 
     const handleType = (e) => {
@@ -16,7 +20,8 @@ const IdLocal = () => {
     }
   
     const uploadLocal = () => {
-      dispatch(fetchPlantNetPlantIdentification(image, type));
+      dispatch(fetchPlantNetPlantIdLocal([image], [type]));
+      history.push('/id/result')
       //dispatch(fetchPlantNetPlantIdentificationForLocalImages([e.target.files[0]], ['flower']))
     }
 
@@ -59,7 +64,7 @@ const IdLocal = () => {
       
       <div className='row'>
         <div className='col-sm-6 offset-md-3'>
-          <img src={image} alt='' width={600}/>
+          <img src={previewImage} alt='' width={600}/>
         </div>
       </div>
     </>
