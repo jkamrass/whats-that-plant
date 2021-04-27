@@ -1,7 +1,7 @@
 import { FETCH_PLANT_NET_PLANT_IDENTIFICATION } from '../actions/index';
 
 const plantIdResultsReducer = (state={}, action) => {
-  debugger;
+  //debugger;
   switch (action.type) {
     case FETCH_PLANT_NET_PLANT_IDENTIFICATION:
       //Grabs the first and most likely returned object (Could return multiple if there are multiple possible matches in the future)

@@ -11,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 const store = createStoreWithMiddleware(reducers);
-store.dispatch(fetchPlantNetPlantIdentification('test'));
+//store.dispatch(fetchPlantNetPlantIdentification('test'));
 
 ReactDOM.render(
   <React.StrictMode>

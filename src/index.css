@@ -29,4 +29,5 @@ p {
 button {
   margin: auto;
   align-items: center;
+  display: block;
 }
