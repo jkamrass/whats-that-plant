@@ -22,6 +22,7 @@ const plantIdResultsReducer = (state={}, action) => {
         commonName: [action.payload.data.data.common_name],
         commonFamilyName: action.payload.data.data.family_common_name,
         plantNetPageUrl: action.payload.data.data.sources.find((source) => source.name === "PlantNet")?.url,
+        wikiUrl: action.payload.data.data.sources.find((source) => source.id === state.scientificName && source.name === "Wikipedia")?.url,
       }
       debugger;
       return {

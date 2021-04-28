@@ -17,7 +17,6 @@ const IdResult = () => {
   }
 
   const callTrefle = () => {
-    debugger;
     dispatch(fetchTrefleInfoForId(idResults?.scientificName))
   }
   // if(Object.keys(idResults).length !== 0) {
@@ -102,6 +101,7 @@ const IdResult = () => {
                 </th>
                 <td>
                 <p><a href={idResults?.plantNetPageUrl} target="_blank" rel="noopener noreferrer">{idResults?.scientificName} - PlantNet</a></p>
+                <p><a href={idResults?.wikiUrl} target="_blank" rel="noopener noreferrer">{idResults?.scientificName} - Wikipedia</a></p>
                 </td>
               </tr>
             </tbody>
