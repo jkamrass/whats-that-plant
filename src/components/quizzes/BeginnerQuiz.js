@@ -50,7 +50,7 @@ const BeginnerQuiz = () => {
 
       <div className = 'row'>
         <div className='col-sm-8 offset-md-2'>
-          {gameData.plants.map((plant) => {
+          {gameData.plantsDisplayed.map((plant) => {
             return (
               <span className = 'border border-success rounded border-4' key={plant.id}>
                 <img src={plant.plantData.imageUrl} alt={plant.plantData.commonName} width = {155} onClick={chooseAnswer}/>
