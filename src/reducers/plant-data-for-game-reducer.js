@@ -16,8 +16,9 @@ const plantDataForGameReducer = (state = [], action) => {
 
   switch (action.type) {
     case FETCH_TREFLE_GAME_INFORMATION:
+      console.log(action.payload);
       debugger;
-      const plantInfoForGame = action.payload.data.data.map(plant=> {
+      const plantInfoForGame = action.payload.map(plant=> {
           return {
             id: plant.id,
             plantData: {
