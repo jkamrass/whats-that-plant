@@ -1,5 +1,4 @@
 const BeginnerScoreCard = ({answer, score, numQuestions}) => {
-  
   const writeGameMessage = (score) => {
     switch (true){
       case score === 5:
