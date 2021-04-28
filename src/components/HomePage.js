@@ -7,7 +7,7 @@ import IdContainer from './IdContainer';
 
 const MainPage = () => {
   return (
-    <>
+    <div className='container-fluid'>
       <div className='row'>
         <div className='col-sm-4 offset-md-4'>
           <h1>What's That Plant?</h1>
@@ -26,7 +26,7 @@ const MainPage = () => {
           <QuizContainer/>
         </Route>
       </Switch>
-    </>
+    </div>
 
   );
 }

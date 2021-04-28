@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux"
 import { fetchTrefleInfoForId } from '../actions'
+import Spinner from "react-bootstrap/Spinner";
 
 const IdResult = () => {
   const idResults = useSelector(state => state.plantIdResults);
@@ -8,11 +9,15 @@ const IdResult = () => {
 
   if(Object.keys(idResults).length === 0) {
     return (
-      <div>Loading...</div>
+      <div>
+        <Spinner animation="border" />
+        Loading...
+      </div>
     )
   }
 
   const callTrefle = () => {
+    debugger;
     dispatch(fetchTrefleInfoForId(idResults?.scientificName))
   }
   // if(Object.keys(idResults).length !== 0) {
@@ -37,35 +42,82 @@ const IdResult = () => {
     }
   }
 
-
-  console.log(idResults);
   return (
-    <div>
+    <>
       <div className="row">
-        <div className="col-md-5 offset-md-2 text-center">
-          <h2>We think your plant is: </h2>
-          <h1 className="font-italic">
-            {idResults?.scientificName}
-          </h1>
-          <h3>
-            Common names: {generateCommonNamesString(idResults.commonNames)}
-          </h3>
-          <h3>
-            How sure are we: {generateCertaintyString(idResults.matchScore)}
-          </h3>
-        </div>
-        <div className="col-md-5">
-          <img src={idResults?.primaryImage} alt='Loading Image...' width={500}/>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-md-6 offset-md-1 text-left">
-          <h2>Compare your picture with pictures for this species:</h2>
-          <img src={userData.userImageUrl} alt='' width={200}/>
+        <div className="col-md-6 offset-md-3 text-center">
           <button className='btn btn-success' onClick={callTrefle}>get more information</button>
         </div>
       </div>
-    </div>
+      <div className="row">
+        <div className="col-md-6 offset-md-3 text-left">
+          <h1>We think your plant is: </h1>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-4 offset-md-2 text-center">
+          <h1 className="font-italic">
+            {idResults?.scientificName}
+          </h1>
+          <h1>
+            {idResults?.commonName}
+          </h1>
+          <table className="table table-hover table-bordered table-striped">
+            <tbody>
+              <tr>
+                <th scope='row'>
+                  Genus:
+                </th>
+                <td>
+                  <span className="font-italic">{idResults?.genus}</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope='row'>
+                  Family:
+                </th>
+                <td>
+                  {idResults?.commonFamilyName} (<span className="font-italic">{idResults?.family}</span>)
+                </td>
+              </tr>
+              <tr>
+                <th scope='row'>
+                  Other Names:
+                </th>
+                <td>
+                  {generateCommonNamesString(idResults.commonNames)}
+                </td>
+              </tr>
+              <tr>
+                <th scope='row'>
+                  How sure are we?
+                </th>
+                <td>
+                  {generateCertaintyString(idResults.matchScore)}
+                </td>
+              </tr>
+              <tr>
+                <th scope='row'>
+                  Useful Links:
+                </th>
+                <td>
+                <p><a href={idResults?.plantNetPageUrl} target="_blank" rel="noopener noreferrer">{idResults?.scientificName} - PlantNet</a></p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div className="col-md-5">
+          <img src={idResults?.primaryImage} alt='Loading Image...' className='img-fluid rounded'/>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-6 offset-md-1">
+          <h2>Your picture(s):</h2>
+          <img src={userData.userImageUrl} alt='' className='img-thumbnail' width={200}/>
+        </div>
+      </div>
+    </>
   )
 }
 
