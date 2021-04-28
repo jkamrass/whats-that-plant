@@ -9,20 +9,25 @@ const plantIdResultsReducer = (state={}, action) => {
         scientificName: action.payload.data.results[0].species.scientificNameWithoutAuthor,
         commonNames: action.payload.data.results[0].species.commonNames,
         family: action.payload.data.results[0].species.family.scientificNameWithoutAuthor,
-        genus: action.payload.data.results[0].species.genus.scientificNameWithoutAuthor,
-        userImage: action.payload.data.query.images[0]
+        genus: action.payload.data.results[0].species.genus.scientificNameWithoutAuthor
       }
       return plantIdInfo;
 
     case FETCH_TREFLE_INFO_FOR_ID:
       console.log(action.payload);
+      const data = action.payload.data.data
       debugger;
       const updatedPlantInfoTreffle = {
-        primaryImage: action.payload.data.data.image_url,
-        commonName: [action.payload.data.data.common_name],
-        commonFamilyName: action.payload.data.data.family_common_name,
-        plantNetPageUrl: action.payload.data.data.sources.find((source) => source.name === "PlantNet")?.url,
-        wikiUrl: action.payload.data.data.sources.find((source) => source.id === state.scientificName && source.name === "Wikipedia")?.url,
+        matchScore: action.payload.match,
+        scientificName: data.scientific_name,
+        commonNames: data.common_names.eng,
+        family: data.family,
+        genus: data.genus,
+        primaryImage: data.image_url,
+        commonName: [data.common_name],
+        commonFamilyName: data.family_common_name,
+        plantNetPageUrl: data.sources.find((source) => source.name === "PlantNet")?.url,
+        wikiUrl: data.sources.find((source) => source.id === data.scientific_name && source.name === "Wikipedia")?.url,
       }
       debugger;
       return {

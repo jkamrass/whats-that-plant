@@ -16,9 +16,9 @@ const IdResult = () => {
     )
   }
 
-  const callTrefle = () => {
-    dispatch(fetchTrefleInfoForId(idResults?.scientificName))
-  }
+  // const callTrefle = () => {
+  //   dispatch(fetchTrefleInfoForId(idResults?.scientificName))
+  // }
   // if(Object.keys(idResults).length !== 0) {
   //   callTrefle();
   // }
@@ -43,11 +43,6 @@ const IdResult = () => {
 
   return (
     <>
-      <div className="row">
-        <div className="col-md-6 offset-md-3 text-center">
-          <button className='btn btn-success' onClick={callTrefle}>get more information</button>
-        </div>
-      </div>
       <div className="row">
         <div className="col-md-6 offset-md-3 text-left">
           <h1>We think your plant is: </h1>
@@ -100,7 +95,7 @@ const IdResult = () => {
                   Useful Links:
                 </th>
                 <td>
-                <p><a href={idResults?.plantNetPageUrl} target="_blank" rel="noopener noreferrer">{idResults?.scientificName} - PlantNet</a></p>
+                <p><a href={idResults?.plantNetPageUrl} target="_blank" rel="noopener noreferrer">{idResults.plantNetPageUrl ? `${idResults?.scientificName} - PlantNet` : null} </a></p>
                 <p><a href={idResults?.wikiUrl} target="_blank" rel="noopener noreferrer">{idResults?.scientificName} - Wikipedia</a></p>
                 </td>
               </tr>

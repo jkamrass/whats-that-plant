@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState } from 'react';
-import { fetchPlantNetPlantIdUrl, updateUserImage } from '../actions'
+import { fetchPlantNetPlantIdUrl, fetchIdResultsUrl, updateUserImage } from '../actions'
 import { useHistory } from 'react-router-dom';
 
 const IdUrl = () => {
@@ -18,7 +18,7 @@ const IdUrl = () => {
     }
   
     const uploadLocal = () => {
-      dispatch(fetchPlantNetPlantIdUrl([image], [type]));
+      dispatch(fetchIdResultsUrl([image], [type]));
       dispatch(updateUserImage(image))
       history.push('/id/result');
     }

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState } from 'react';
-import { fetchPlantNetPlantIdLocal, updateUserImage } from '../actions/index';
+import { fetchIdResultsLocal, fetchPlantNetPlantIdLocal, updateUserImage } from '../actions/index';
 import { useHistory } from 'react-router-dom';
 
 const IdLocal = () => {
@@ -20,9 +20,10 @@ const IdLocal = () => {
     }
   
     const uploadLocal = () => {
-      dispatch(fetchPlantNetPlantIdLocal([image], [type], previewImage));
-      dispatch(updateUserImage(previewImage))
-      history.push('/id/result')
+      // dispatch(fetchPlantNetPlantIdLocal([image], [type], previewImage));
+      dispatch(fetchIdResultsLocal([image], [type], previewImage));
+      dispatch(updateUserImage(previewImage));
+      history.push('/id/result');
       //dispatch(fetchPlantNetPlantIdentificationForLocalImages([e.target.files[0]], ['flower']))
     }
 
