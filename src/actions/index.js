@@ -39,9 +39,7 @@ export const fetchPlantNetPlantIdLocal = (images, organsDisplayedinImages, userI
 export const fetchTrefleInfoForId = (scientificName) => {
   // Search for a plant by common name, scientific name, or other input field
 
-  const idToRetrieve = scientificName.toLowerCase().replace(' ', '-')
-  console.log(idToRetrieve);
-  debugger;
+  const idToRetrieve = scientificName.toLowerCase().replace(' ', '-');
   const url = `https://trefle.io/api/v1/species/${idToRetrieve}?token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s`
   const request = axios.get(url);
   return {

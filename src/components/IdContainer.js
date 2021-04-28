@@ -7,26 +7,22 @@ import IdResult from './IdResult';
 
 const IdContainer = () => {
   return (
-    <div className = 'row'>
-        <div className='col-sm-8 offset-md-2'>
-          <Switch>
-            <Route exact path='/id'>
-              <IdMenu/>
-            </Route>
-            <Route exact path='/id/local'>
-              <IdMenu/>
-              <IdLocal/>
-            </Route>
-            <Route exact path='/id/url'>
-              <IdMenu/>
-              <IdUrl />
-            </Route>
-            <Route exact path='/id/result'>
-              <IdResult/>
-            </Route>
-          </Switch>
-        </div>
-      </div>
+    <Switch>
+      <Route exact path='/id'>
+        <IdMenu/>
+      </Route>
+      <Route exact path='/id/local'>
+        <IdMenu/>
+        <IdLocal/>
+      </Route>
+      <Route exact path='/id/url'>
+        <IdMenu/>
+        <IdUrl />
+      </Route>
+      <Route exact path='/id/result'>
+        <IdResult/>
+      </Route>
+    </Switch>
   )
 }
 
