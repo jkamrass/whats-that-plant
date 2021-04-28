@@ -1,8 +1,9 @@
 import axios from "axios";
 export const FETCH_PLANT_NET_PLANT_IDENTIFICATION = "FETCH_PLANT_NET_PLANT_IDENTIFICATION";
-export const FETCH_TREFLE_PLANT_INFORMATION = "FETCH_TREFLE_PLANT_INFORMATION";
+export const FETCH_TREFLE_GAME_INFORMATION = "FETCH_TREFLE_PLANT_INFORMATION";
 export const UPDATE_USER_IMAGE = 'UPDATE_USER_IMAGE';
 export const FETCH_TREFLE_INFO_FOR_ID = 'FETCH_TREFLE_INFO_FOR_ID';
+export const UPDATE_ANSWER = 'UPDATE_ANSWER';
 
 // Sends a get request to plant net for a plant identification based upon remote image urls
 export const fetchPlantNetPlantIdUrl = (imageUrlsForPlant, organsDisplayedinImages, guessedCategoryForPlant) => {
@@ -52,14 +53,21 @@ export const fetchTrefleInfoForId = (scientificName) => {
 //TODO: Figure out the different types of requests we will need to make and set up an action for each one.
 export const fetchTrefleGameInformation = (searchTerm) => {
   // Search for a plant by common name, scientific name, or other input field
-  // https://trefle.io/api/v1/plants/search?q=${searchTerm}&token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s
-  const url = `https://trefle.io/api/v1/plants?token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s`
+  // https://trefle.io/api/v1/plants?filter%5Bfamily_name%5D=Brassicaceae&token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s
+  const url = `https://trefle.io/api/v1/plants?filter%5Bfamily_name%5D=Brassicaceae&token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s`
   const request = axios.get(url);
   return {
-    type: FETCH_TREFLE_PLANT_INFORMATION,
+    type: FETCH_TREFLE_GAME_INFORMATION,
     payload: request
   }
 }
+
+export const updateAnswer = (correctAnswer) =>{
+  return {
+    type: UPDATE_ANSWER,
+    payload: correctAnswer
+  }
+};
 
 export const updateUserImage = (imageUrl) => {
   return {

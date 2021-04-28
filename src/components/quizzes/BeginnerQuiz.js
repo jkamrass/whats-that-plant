@@ -1,55 +1,65 @@
 import { QuizData } from './QuizData';
 import BeginnerScoreCard from './BeginnerScoreCard';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import {fetchTrefleGameInformation, updateAnswer} from '../../actions/index';
+import { useDispatch, useSelector } from 'react-redux';
+import Spinner from "react-bootstrap/Spinner";
 
 const BeginnerQuiz = () => {
-  const randomValue = Math.floor(Math.random()*5);
+  const gameData = useSelector(state => state.plantDataForGame)
+  //gameData.answer, .score, .numQuestions
   
-  const [answer, setAnswer] = useState (QuizData.plants[randomValue].name);
-  const [score, setScore] = useState(0);
-  const [numQuestions, setNumQuestions] = useState(0);
+  const dispatch = useDispatch();
+  
+  useEffect(()=>{
+    dispatch(fetchTrefleGameInformation());
+  }, [])
 
-  const resetAnswer = () => {
-    const randomValue2 = Math.floor(Math.random()*5);
-    setAnswer(QuizData.plants[randomValue2].name);
-    setNumQuestions(numQuestions+1);
+
+  if(gameData.length === 0) {
+    return (
+      <div>
+        <Spinner animation="border" />
+        Loading...
+      </div>
+    )
   }
+
+  //setAnswer(gameData[randomValue].plantData.name)
+
   
-  const logRandom = () => {
-    
-    console.log(randomValue);
-    console.log(QuizData);
-  }
+    // setAnswer(gameData[randomValue2].plantData.name);
+    // setNumQuestions(numQuestions+1);
+  
 
   const chooseAnswer = (e) => {
-    if (e.target.alt === answer){
-      setScore(score+1)
-      resetAnswer();
-      return
+    let correct = false
+    if (e.target.alt === gameData.answer){
+      correct = true;
     }
-    resetAnswer();
+    dispatch(updateAnswer(correct));
   }
 
   return (
     <>
       <div className = 'row'>
         <div className='col-sm-8 offset-md-2'>
-          <h1 onClick={logRandom}>sprout's quiz</h1>
+          <h1>sprout's quiz</h1>
         </div>
       </div>
 
       <div className = 'row'>
         <div className='col-sm-8 offset-md-2'>
-          {QuizData.plants.map((plant) => {
+          {gameData.plants.map((plant) => {
             return (
-              <span className = 'border border-success rounded border-4'>
-                <img src={plant.image} alt={plant.name} width = {155} onClick={chooseAnswer}/>
+              <span className = 'border border-success rounded border-4' key={plant.id}>
+                <img src={plant.plantData.imageUrl} alt={plant.plantData.commonName} width = {155} onClick={chooseAnswer}/>
               </span>
             )
           })}
         </div>
       </div>
-      <BeginnerScoreCard answer={answer} score={score} numQuestions={numQuestions}/>
+      <BeginnerScoreCard answer={gameData.answer} score={gameData.score} numQuestions={gameData.numQuestions}/>
     </>
       
   )
