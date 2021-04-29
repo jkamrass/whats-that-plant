@@ -8,7 +8,6 @@ const plantDataForGameReducer = (state = [], action) => {
     const plantsForDisplay = [];
     const arrayCopy = [...array]
     for (let i = 0; i < numImages; i++) {
-      
       plantsForDisplay.push(arrayCopy.splice(randomValue(arrayCopy.length), 1))
     }
     return plantsForDisplay.flat();

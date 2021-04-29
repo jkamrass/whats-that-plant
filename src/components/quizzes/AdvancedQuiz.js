@@ -2,141 +2,81 @@ import React, { Component, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { QuizData } from './QuizData';
+import _ from 'lodash';
 
-// fake data generator
-const getItems = count =>
-  Array.from({ length: count }, (v, k) => k).map(k => ({
-    id: `item-${k}`,
-    content: `item ${k}`,
-  }));
+const AdvancedQuiz = () => {
+  const [choices, setChoices] = useState(_.shuffle(QuizData.plants));
+  const [answers, setAnswers] =useState(_.shuffle(QuizData.plants.map(plant => plant.name)));
+  const [score, setScore] = useState(0);
+  
 
+  const handleOnDragEnd = (result) =>{
+    if (!result.destination) return
+    const items = Array.from(choices);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
 
-// a little function to help us with reordering the result
-const reorder = (list, startIndex, endIndex) => {
-  const result = Array.from(list);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
-
-  return result;
-};
-
-const grid = 8;
-
-const getItemStyle = (isDragging, draggableStyle) => ({
-  // some basic styles to make the items look a bit nicer
-  userSelect: 'none',
-  padding: grid * 2,
-  margin: `0 ${grid}px 0 0`,
-
-  // change background colour if dragging
-  background: isDragging ? 'lightgreen' : 'grey',
-
-  // styles we need to apply on draggables
-  ...draggableStyle,
-});
-
-const getListStyle = isDraggingOver => ({
-  background: isDraggingOver ? 'lightblue' : 'lightgrey',
-  display: 'flex',
-  padding: grid,
-  overflow: 'auto',
-});
-
-class AdvancedQuiz extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      items: getItems(6),
-    };
-    this.onDragEnd = this.onDragEnd.bind(this);
+    setChoices(items);
   }
 
-  onDragEnd(result) {
-    // dropped outside the list
-    if (!result.destination) {
-      return;
-    }
-
-    const items = reorder(
-      this.state.items,
-      result.source.index,
-      result.destination.index
-    );
-
-    this.setState({
-      items,
-    });
+  const checkScore = () => {
+    let rightAnswers = 0;
+    answers.forEach((answer, i)=> {
+      if (answer === choices[i].name){
+        rightAnswers +=1;
+      }
+    })
+    setScore(rightAnswers);
   }
 
-  // Normally you would want to split things out into separate components.
-  // But in this example everything is just done in one place for simplicity
-  render() {
-    return (
-      <>
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <Droppable droppableId="droppable" direction="horizontal">
-          {(provided, snapshot) => (
-            <div
-              ref={provided.innerRef}
-              style={getListStyle(snapshot.isDraggingOver)}
-              {...provided.droppableProps}
-            >
-              {this.state.items.map((item, index) => (
-                <Draggable key={item.id} draggableId={item.id} index={index}>
-                  {(provided, snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      style={getItemStyle(
-                        snapshot.isDragging,
-                        provided.draggableProps.style
-                      )}
-                    >
-                      {item.content}
-                    </div>
-                  )}
-                </Draggable>
-              ))}
+  return (
+    <>
+      <br></br>
+      <DragDropContext onDragEnd={handleOnDragEnd}>
+        <Droppable droppableId='plants' direction='horizontal'>
+          {(provided) => (
+            <>
+              <ul className='list-group list-group-horizontal' {...provided.droppableProps} ref={provided.innerRef}>
+              {choices.map((plant, index) => {
+                return (
+                  <div className='col-sm-2'>
+                    <Draggable key={plant.id} draggableId={plant.id} index={index}>
+                    {(provided) => (
+                      <li ref ={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className='list-group-item'>
+                        <div>
+                          <img src={plant.image} alt={`${plant.name}`} className='img-fluid'/>
+                        </div>
+                      </li>
+                    )}
+                    </Draggable>
+                  </div> 
+                )
+              })}
               {provided.placeholder}
-            </div>
+              </ul>
+            </>
           )}
         </Droppable>
       </DragDropContext>
-      <DragDropContext onDragEnd={this.onDragEnd}>
-      <Droppable droppableId="droppable" direction="horizontal">
-        {(provided, snapshot) => (
-          <div
-            ref={provided.innerRef}
-            style={getListStyle(snapshot.isDraggingOver)}
-            {...provided.droppableProps}
-          >
-            {this.state.items.map((item, index) => (
-              <Draggable key={item.id} draggableId={item.id} index={index}>
-                {(provided, snapshot) => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    style={getItemStyle(
-                      snapshot.isDragging,
-                      provided.draggableProps.style
-                    )}
-                  >
-                    {item.content}
-                  </div>
-                )}
-              </Draggable>
-            ))}
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
-    </DragDropContext>
+      <div className='row'>
+          {answers.map(answer => {
+            return (
+              <>
+                <div className='col-sm-2'>
+                  <h3>{answer}</h3>
+                </div>
+              </>
+            )
+          })}
+      </div>
+      <div className='row'>
+        <div className='col-sm-4 offset-md-4 text-center'>
+          <button className='btn btn-success btn-lg' onClick={checkScore}>Submit</button>
+          <h3>your score: {score/answers.length*100}%</h3>
+        </div>
+      </div>
     </>
-    );
-  }
+  )
 }
 
-// Put the thing into the DOM!
-export default AdvancedQuiz
+export default AdvancedQuiz;
