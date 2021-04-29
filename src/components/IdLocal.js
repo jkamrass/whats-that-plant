@@ -2,6 +2,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import React, { useState } from 'react';
 import { fetchIdResultsLocal, fetchPlantNetPlantIdLocal, updateUserImages } from '../actions/index';
 import { useHistory } from 'react-router-dom';
+import PreviewImage from './PreviewImage';
+import SearchImageThumbnail from './SearchImageThumbnail';
+
 
 const IdLocal = () => {
   const [images, setImages] = useState([]);
@@ -12,6 +15,22 @@ const IdLocal = () => {
   const history = useHistory();
   
   const handleFileInput = (e) => {
+    //Makes sure there is actually a file. If someone closes the browse file without choosing a file it will still trigger this event.
+    if (!e.target.files.length) {
+      return;
+    }
+    // Makes sure the user chose only one image 
+    if (e.target.files.length !== 1) {
+      alert("Please upload only one image at a time");
+      return;
+    }
+    //Validation of that file is indeed an image (jpeg, pnp, jpg)
+    const fileType = e.target.files[0].type
+    if (fileType !== "image/jpeg" && fileType !== "image/png"  && fileType !== "image/jpg") {
+      alert("File must be a photo (jpeg, png, jpg)");
+      return;
+    }
+    
     setPreviewImage({
       image: e.target.files[0],
       imageUrl: URL.createObjectURL(e.target.files[0])
@@ -21,6 +40,7 @@ const IdLocal = () => {
   }
 
   const addImage = () => {
+    debugger;
     setImages(images.concat(previewImage));
     setTypes(types.concat(previewType));
     setPreviewImage('');
