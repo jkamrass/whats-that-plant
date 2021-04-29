@@ -3,12 +3,25 @@ import React, { useState } from 'react';
 import { fetchPlantNetPlantIdUrl, fetchIdResultsUrl, updateUserImages } from '../actions'
 import { useHistory } from 'react-router-dom';
 import PreviewImage from './PreviewImage';
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
+import SearchImageThumbnail from './SearchImageThumbnail';
+
+const imageInputSchema = Yup.object().shape({
+  Image: Yup.string().required().url(),
+  plantPart: Yup.string().required(),
+});
 
 const IdUrl = () => {
+  const { register, handleSubmit, watch, setValue, formState:{ errors }} = useForm({
+    resolver: yupResolver(imageInputSchema)
+  });
+
   const [images, setImages] = useState([]);
   const [types, setTypes] = useState([]);
-  const [previewImage, setPreviewImage] = useState(null);
-  const [previewType, setPreviewType] = useState('a picture of?');
+  // const [previewImage, setPreviewImage] = useState(null);
+  // const [previewType, setPreviewType] = useState('a picture of?');
   const dispatch = useDispatch();
   const history = useHistory();
   
@@ -25,22 +38,19 @@ const IdUrl = () => {
     history.push('/id/result');
   }
 
-  const addImage = () => {
-    setImages(images.concat(previewImage));
-    setTypes(types.concat(previewType));
-    setPreviewImage('');
-    setPreviewType('a picture of?')
+  const addImage = (data) => {
+    setImages(images.concat(watch("Image")));
+    setTypes(types.concat(watch("plantPart")))
+    setValue("Image", '');
+    setValue("plantPart", 'leaf');
   }
 
-  const generateSearchImageThumbnails = () => {
-    return images.map((image, index) => {
-      return (
-        <div className='col-sm-2' key={index}>
-          <img src={image} alt='' className="img-thumbnail"/>
-        </div>)
-    }
-    )
+  const deleteImage = (indexOfImageToBeDeleted) => {
+    setImages(images.filter((image, index) => index !== indexOfImageToBeDeleted));
+    setTypes(types.filter((type, index) => index !== indexOfImageToBeDeleted));
   }
+
+  const generateSearchImageThumbnails = () => images.map((image, index) => <SearchImageThumbnail image={image} imageNumber={index} type={types[index]} deleteImage={deleteImage}/>);
 
   const generateGetIdButton = () => (
     <div className='col-sm-6 offset-sm-3 text-center'>
@@ -50,20 +60,26 @@ const IdUrl = () => {
 
   const generateUrlInputForm = () => {
     return (
-      <div className="input-group mb-3">
-        <div className="input-group mb-3">
-          <input type="text" className="form-control" placeholder="image location (url)" value={previewImage}   aria-label="image url" aria-describedby="basic-addon2" onChange={(e) => setPreviewImage(e.target.value)}/>
+      <div className="mb-3">
+        <label htmlFor="urlImage">Image:</label>
+        <div className="form-group mb-2">
+          <input type="text" className="form-control" id="urlImage" placeholder="image location (url)" aria-label="image url" aria-describedby="basic-addon2" {...register("Image")} />
+          <small className="form-text text-muted">{errors.Image?.message}</small>
         </div>
-        <select className="custom-select" id="inputGroupSelect01" onChange={(e) => setPreviewType(e.target.value)} value={previewType} defaultValue='a picture of?'>
-          <option selected>a picture of?</option>
-          <option value="leaf">leaf</option>
-          <option value="flower">flower</option>
-          <option value="fruit">fruit</option>
-          <option value="habit">habit</option>
-          <option value="other">other</option>
-        </select>
-        <div className="input-group-append">
-          <button className="btn btn-outline-secondary" type="button" onClick={addImage}>Add Image</button>
+        <label htmlFor="inputGroupSelect01">Part of Plant Displayed in Image (Leaf is safest bet if unsure):</label>
+        <div className="input-group">
+          <select className="custom-select" id="inputGroupSelect01" {...register("plantPart")}>
+            <option value="leaf">leaf</option>
+            <option value="flower">flower</option>
+            <option value="fruit">fruit</option>
+            <option value="bark">bark</option>
+            <option value="habit">habit</option>
+            <option value="other">other</option>
+          </select>
+          <div className="input-group-append">
+            <button className="btn btn-outline-secondary" type="button" onClick={handleSubmit(addImage)}>Add Image</button>
+          </div>
+          {errors.plantPart?.message}
         </div>
       </div>
     )
@@ -82,14 +98,14 @@ const IdUrl = () => {
         <div className='col-sm-5 offset-sm-3'>
           {images.length < 5 ? generateUrlInputForm() : <h3>Max Number of Images Reached</h3>}
         </div>
-        {previewImage ? <PreviewImage imageUrl={previewImage}/> : null}
+        {watch("Image") ? <PreviewImage imageUrl={watch("Image")}/> : null}
       </div>
 
       <div className='row'>
         {images.length !== 0 ? generateGetIdButton() : null}
       </div>
 
-      <div className='row mb-5'>
+      <div className='row pb-5'>
         <div className='col-sm-1'></div>
         {images.length !== 0 ? generateSearchImageThumbnails() : null}
       </div>

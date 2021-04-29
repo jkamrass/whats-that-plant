@@ -49,23 +49,41 @@ export const fetchTrefleInfoForId = (scientificName) => {
   }
 }
 
-export const fetchIdResultsLocal = async (images, organsDisplayedinImages, userImage, guessedCategoryForPlant) => {
-  const baseUrl = `https://my-api.plantnet.org/v2/identify/all?api-key=${process.env.REACT_APP_PLANT_NET_API_KEY}`;
-  let form = new FormData();
-  for (let i = 0; i < images.length; i++) {
-    form.append('organs', organsDisplayedinImages[0]);
-    form.append('images', images[0].image)
+export const fetchIdResultsLocal = (images, organsDisplayedinImages, userImage, guessedCategoryForPlant) => {
+
+  const fetchStuff = async (images, organsDisplayedinImages, userImage, guessedCategoryForPlant) => {
+    try{
+      const baseUrl = `https://my-api.plantnet.org/v2/identify/all?api-key=${process.env.REACT_APP_PLANT_NET_API_KEY}`;
+      let form = new FormData();
+      for (let i = 0; i < images.length; i++) {
+        form.append('organs', organsDisplayedinImages[0]);
+        form.append('images', images[0].image)
+      }
+    
+      //form.append('images', fs.createReadStream(images[i]));
+      const idRequest = await axios.post(baseUrl, form);
+      const matchScore = idRequest.data.results[0].score;
+      const idToRetrieve = idRequest.data.results[0].species.scientificNameWithoutAuthor.toLowerCase().replace(' ', '-');
+      const url = `https://trefle.io/api/v1/species/${idToRetrieve}?token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s`
+  
+      try {
+        const trefleRequest = await axios.get(url);
+        return {...trefleRequest, match: matchScore}
+
+      } catch (e) {
+        console.error(e)
+        debugger;
+      }
+    } catch (e) {
+      console.error(e)
+      debugger;
+    }
   }
 
-  //form.append('images', fs.createReadStream(images[i]));
-  const idRequest = await axios.post(baseUrl, form);
-  const matchScore = idRequest.data.results[0].score;
-  const idToRetrieve = idRequest.data.results[0].species.scientificNameWithoutAuthor.toLowerCase().replace(' ', '-');
-  const url = `https://trefle.io/api/v1/species/${idToRetrieve}?token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s`
-  const trefleRequest = await axios.get(url);
+
   return {
     type: FETCH_TREFLE_INFO_FOR_ID,
-    payload: {...trefleRequest, match: matchScore}
+    payload: fetchStuff(images, organsDisplayedinImages, userImage, guessedCategoryForPlant)
   }
 }
 
