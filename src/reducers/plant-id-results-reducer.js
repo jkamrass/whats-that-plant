@@ -15,8 +15,8 @@ const plantIdResultsReducer = (state={}, action) => {
 
     case FETCH_TREFLE_INFO_FOR_ID:
       console.log(action.payload);
-      const data = action.payload.data.data
       debugger;
+      const data = action.payload.data.data
       const updatedPlantInfoTreffle = {
         matchScore: action.payload.match,
         scientificName: data.scientific_name,
