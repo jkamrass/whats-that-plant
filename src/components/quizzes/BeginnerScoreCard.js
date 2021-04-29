@@ -4,20 +4,20 @@ import { useParams, Switch, Route, Link } from 'react-router-dom';
 const BeginnerScoreCard = ({answer, score, numQuestions}) => {
   const writeGameMessage = (score) => {
     switch (true){
-      case score === 5:
-        return 'great job! you\'re ready for our gardener\'s quiz!'
-      case score === 4:
+      case score === 10:
+        return 'great job! you should be teaching us!'
+      case score > 7:
         return 'well done!'
-      case score === 3:
+      case score > 5:
         return 'you\'re getting the hang of it!'
-      case score ===2:
+      case score > 3:
         return 'maybe a little more practice will help'
       default:
         return 'better luck next time, champ'
     }
   }
   
-  if (numQuestions < 5) {
+  if (numQuestions < 10) {
     return (
       <>
         <div className = 'row'>
@@ -46,9 +46,6 @@ const BeginnerScoreCard = ({answer, score, numQuestions}) => {
             <h1>Your score:</h1>
             <h1>{score}/{numQuestions}</h1>
           </div>
-          <Link to='/quiz'>
-            <button className='btn btn-success btn-sm'>back</button>
-          </Link>
         </div>
       </div>
       

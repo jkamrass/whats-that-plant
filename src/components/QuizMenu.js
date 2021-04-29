@@ -4,8 +4,8 @@ const QuizMenu = () => {
   return (
     <>
       <div className="row">
-        <div className='col-sm-8 offset-md-2'>
-          <p> we have a few options for quizzes. what fits you best?</p>
+        <div className='col-sm-8 offset-md-2 text-center'>
+          <h1>quizzes</h1>
         </div>
       </div>
       <div className='row'>
@@ -14,23 +14,17 @@ const QuizMenu = () => {
         </div>
       </div>
       <div className='row'>
-        <div className='col-sm-2 offset-md-3 text-center'>
+        <div className='col-sm-3 offset-md-3 text-center'>
           <Link to='/quiz/sprout-beginner'>
             <button className='btn btn-success btn-xl'>sprout's quiz</button>
           </Link>
-          <p>for beginners. select an image to match the species provided.</p>
+          <p>for beginners. match 6 plants to their common names.</p>
         </div>
-        <div className='col-sm-2 text-center'>
-          <Link to='/quiz/gardener-standard'>
-            <button className='btn btn-success btn-xl'>gardener's quiz</button>
-          </Link>
-          <p>for folks who garden. select the correct name to match an image provided.</p>
-        </div>
-        <div className='col-sm-2 text-center'>
+        <div className='col-sm-3 text-center'>
           <Link to='/quiz/greenthumb-advanced'>
             <button className='btn btn-success btn-xl'>green thumb's quiz</button>
           </Link>
-          <p>for gods of the harvest. match the scientific names of 5 plants to 5 images.</p>
+          <p>for gardeners. select the right picture of the plant from 4 choices.</p>
         </div>
       </div>
     </>

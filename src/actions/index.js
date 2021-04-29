@@ -4,6 +4,7 @@ export const FETCH_TREFLE_GAME_INFORMATION = "FETCH_TREFLE_GAME_INFORMATION";
 export const UPDATE_USER_IMAGES = 'UPDATE_USER_IMAGES';
 export const FETCH_TREFLE_INFO_FOR_ID = 'FETCH_TREFLE_INFO_FOR_ID';
 export const UPDATE_ANSWER = 'UPDATE_ANSWER';
+export const UPDATE_PLANTS_DISPLAYED = 'UPDATE_PLANTS_DISPLAYED'
 
 // Sends a get request to plant net for a plant identification based upon remote image urls
 export const fetchPlantNetPlantIdUrl = (imageUrlsForPlant, organsDisplayedinImages, guessedCategoryForPlant) => {
@@ -89,25 +90,27 @@ export const fetchIdResultsUrl = async (imageUrlsForPlant, organsDisplayedinImag
 
 //Sends a get request to trefle for plant information (Right now it returns all plants)
 //TODO: Figure out the different types of requests we will need to make and set up an action for each one.
-export const fetchTrefleGameInformation = async (searchTerm) => {
+export const fetchTrefleGameInformation = async (numImagesToDisplay) => {
   // Search for a plant by common name, scientific name, or other input field
   // https://trefle.io/api/v1/plants?filter%5Bfamily_name%5D=Brassicaceae&token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s
   //Brassicas: https://trefle.io/api/v1/plants?filter%5Bfamily_name%5D=Brassicaceae&token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s
   //Edibles: https://trefle.io/api/v1/plants?filter_not%5Bedible_part%5D=null&token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s
   let plantsList = [];
   for (let page = 1; page <=5 ; page++) {
-    const url = `https://trefle.io/api/v1/plants?filter_not%5Bedible_part%5D=null&filter_not%5Bcommon_name%5D=null&filter_not%5Bimage_url%5D=null&token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s&page=${page}`
+    const url = `https://trefle.io/api/v1/plants?filter_not%5Bcommon_name%5D=null&filter_not%5Bimage_url%5D=null&order%5Bsources_count%5D=desc&token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s&page=${page}`
     const request = await axios.get(url);
     plantsList = [...plantsList, ...request.data.data];
-    console.log(plantsList);
   }
- 
 
   return {
     type: FETCH_TREFLE_GAME_INFORMATION,
-    payload: plantsList
+    payload: {
+      plants: plantsList,
+      numImages: numImagesToDisplay 
+    }
   }
 }
+
 
 export const updateAnswer = (correctAnswer) =>{
   return {
