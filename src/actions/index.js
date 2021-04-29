@@ -52,8 +52,11 @@ export const fetchTrefleInfoForId = (scientificName) => {
 export const fetchIdResultsLocal = async (images, organsDisplayedinImages, userImage, guessedCategoryForPlant) => {
   const baseUrl = `https://my-api.plantnet.org/v2/identify/all?api-key=${process.env.REACT_APP_PLANT_NET_API_KEY}`;
   let form = new FormData();
-  form.append('organs', organsDisplayedinImages[0]);
-  form.append('images', images[0])
+  for (let i = 0; i < images.length; i++) {
+    form.append('organs', organsDisplayedinImages[0]);
+    form.append('images', images[0].image)
+  }
+
   //form.append('images', fs.createReadStream(images[i]));
   const idRequest = await axios.post(baseUrl, form);
   const matchScore = idRequest.data.results[0].score;
