@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import React, { useState } from 'react';
 import { fetchPlantNetPlantIdUrl, fetchIdResultsUrl, updateUserImages } from '../actions'
 import { useHistory } from 'react-router-dom';
+import PreviewImage from './PreviewImage';
 
 const IdUrl = () => {
   const [images, setImages] = useState([]);
@@ -81,9 +82,7 @@ const IdUrl = () => {
         <div className='col-sm-5 offset-sm-3'>
           {images.length < 5 ? generateUrlInputForm() : <h3>Max Number of Images Reached</h3>}
         </div>
-        <div className="col-sm-2">
-          <img src={previewImage} alt='' className="img-thumbnail"/>
-        </div>
+        {previewImage ? <PreviewImage imageUrl={previewImage}/> : null}
       </div>
 
       <div className='row'>
