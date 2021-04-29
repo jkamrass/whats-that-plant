@@ -14,7 +14,7 @@ const imageChoices = ({answer, score, numQuestions, gameData, chooseAnswer }) =>
             return (
               <div className='col-sm-3'>
                 <span className = 'border border-success rounded border-4' key={plant.id}>
-                  <img className='img-fluid' src={plant.plantData.imageUrl} alt={plant.plantData.commonName} onClick={chooseAnswer}/>
+                  <img className='img-fluid' src={plant.plantData.imageUrl} alt={plant.plantData.commonName} onClick={chooseAnswer} onError={(e)=>{e.target.onerror = null; e.target.src="https://image.freepik.com/free-vector/something-went-wrong-neon-text_118419-43.jpg"}}/>
                 </span>
               </div>
             )
