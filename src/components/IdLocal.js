@@ -10,44 +10,6 @@ const IdLocal = () => {
   const [previewType, setPreviewType] = useState('a picture of?');
   const dispatch = useDispatch();
   const history = useHistory();
-
-  // const [image, setImage] = useState(null);
-  // const [previewImage, setPreviewImage] = useState(null);
-  // const [type, setType] = useState('other');
-  // const history = useHistory();
-  // const dispatch = useDispatch();
-
-  // const generateUrlInputForm = () => {
-  //   return (
-  //     <div className="input-group mb-3">
-  //       <div className="input-group mb-3">
-  //         <input type="text" className="form-control" placeholder="image location (url)" value={previewImage}   aria-label="image url" aria-describedby="basic-addon2" onChange={(e) => setPreviewImage(e.target.value)}/>
-  //       </div>
-  //       <select className="custom-select" id="inputGroupSelect01" onChange={(e) => setPreviewType(e.target.value)} value={previewType} defaultValue='a picture of?'>
-  //         <option selected>a picture of?</option>
-  //         <option value="leaf">leaf</option>
-  //         <option value="flower">flower</option>
-  //         <option value="fruit">fruit</option>
-  //         <option value="habit">habit</option>
-  //         <option value="other">other</option>
-  //       </select>
-  //       <div className="input-group-append">
-  //         <button className="btn btn-outline-secondary" type="button" onClick={addImage}>Add Image</button>
-  //       </div>
-  //     </div>
-  //   )
-  // }
-
-  // const handleType = (e) => {
-  //   setType(e.target.value);
-  // }
-  // const uploadLocal = () => {
-  //   // dispatch(fetchPlantNetPlantIdLocal([image], [type], previewImage));
-  //   dispatch(fetchIdResultsLocal([image], [type], previewImage));
-  //   dispatch(updateUserImages(previewImage));
-  //   history.push('/id/result');
-  //   //dispatch(fetchPlantNetPlantIdentificationForLocalImages([e.target.files[0]], ['flower']))
-  // }
   
   const handleFileInput = (e) => {
     setPreviewImage({
@@ -137,3 +99,42 @@ const IdLocal = () => {
   )
 }
 export default IdLocal
+
+
+  // const [image, setImage] = useState(null);
+  // const [previewImage, setPreviewImage] = useState(null);
+  // const [type, setType] = useState('other');
+  // const history = useHistory();
+  // const dispatch = useDispatch();
+
+  // const generateUrlInputForm = () => {
+  //   return (
+  //     <div className="input-group mb-3">
+  //       <div className="input-group mb-3">
+  //         <input type="text" className="form-control" placeholder="image location (url)" value={previewImage}   aria-label="image url" aria-describedby="basic-addon2" onChange={(e) => setPreviewImage(e.target.value)}/>
+  //       </div>
+  //       <select className="custom-select" id="inputGroupSelect01" onChange={(e) => setPreviewType(e.target.value)} value={previewType} defaultValue='a picture of?'>
+  //         <option selected>a picture of?</option>
+  //         <option value="leaf">leaf</option>
+  //         <option value="flower">flower</option>
+  //         <option value="fruit">fruit</option>
+  //         <option value="habit">habit</option>
+  //         <option value="other">other</option>
+  //       </select>
+  //       <div className="input-group-append">
+  //         <button className="btn btn-outline-secondary" type="button" onClick={addImage}>Add Image</button>
+  //       </div>
+  //     </div>
+  //   )
+  // }
+
+  // const handleType = (e) => {
+  //   setType(e.target.value);
+  // }
+  // const uploadLocal = () => {
+  //   // dispatch(fetchPlantNetPlantIdLocal([image], [type], previewImage));
+  //   dispatch(fetchIdResultsLocal([image], [type], previewImage));
+  //   dispatch(updateUserImages(previewImage));
+  //   history.push('/id/result');
+  //   //dispatch(fetchPlantNetPlantIdentificationForLocalImages([e.target.files[0]], ['flower']))
+  // }

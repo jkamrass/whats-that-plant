@@ -20,7 +20,7 @@ const plantIdResultsReducer = (state={}, action) => {
       const updatedPlantInfoTreffle = {
         matchScore: action.payload.match,
         scientificName: data.scientific_name,
-        commonNames: data.common_names.eng,
+        commonNames: data.common_names.eng || data.common_names.en,
         family: data.family,
         genus: data.genus,
         primaryImage: data.image_url,
