@@ -4,37 +4,51 @@ import { fetchPlantNetPlantIdUrl, fetchIdResultsUrl, updateUserImage } from '../
 import { useHistory } from 'react-router-dom';
 
 const IdUrl = () => {
-  const [image, setImage] = useState(null);
-  const [type, setType] = useState('other');
-  const [numOfImagesForSearch, setNumOfImagesForSearch] = useState(1);
+  const [images, setImages] = useState([]);
+  const [previewImage, setPreviewImage] = useState(null);
+  const [previewType, setPreviewType] = useState('a picture of?');
+  const [types, setTypes] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
   
-  const handleChange = (e) => {
-    setImage(e.target.value);
+  const handleUrlInputChange = (e) => {
+    setPreviewImage(e.target.value);
   }
 
-  const handleType = (e) => {
-    setType(e.target.value);
+  const handleTypeInputChange = (e) => {
+    setPreviewType(e.target.value);
   }
 
   const uploadLocal = () => {
-    dispatch(fetchIdResultsUrl([image], [type]));
-    dispatch(updateUserImage(image))
+    dispatch(fetchIdResultsUrl(images, types));
+    dispatch(updateUserImage(images))
     history.push('/id/result');
   }
 
-  const addUrlInputGroup = () => {
-    numOfImagesForSearch < 5 ? setNumOfImagesForSearch(numOfImagesForSearch+1) : alert("Can't upload more than 5 images for search")
+  const addImage = () => {
+    setImages(images.concat(previewImage));
+    setTypes(types.concat(previewType));
+    setPreviewImage('');
+    setPreviewType('a picture of?')
   }
 
-  const generateSingleUrlInput = () => {
+  const generateSearchImageThumbnails = () => {
+    return images.map((image, index) => {
+      return (
+        <div className='col-sm-2' key={index}>
+          <img src={image} alt='' className="img-thumbnail"/>
+        </div>)
+    }
+    )
+  }
+
+  const generateUrlInputForm = () => {
     return (
       <div className="input-group mb-3">
         <div className="input-group mb-3">
-          <input type="text" className="form-control" placeholder="image location (url)"    aria-label="image url" aria-describedby="basic-addon2" onChange={handleChange}/>
+          <input type="text" className="form-control" placeholder="image location (url)" value={previewImage}   aria-label="image url" aria-describedby="basic-addon2" onChange={handleUrlInputChange}/>
         </div>
-        <select className="custom-select" id="inputGroupSelect01" onChange={handleType} defaultValue='a picture of?'>
+        <select className="custom-select" id="inputGroupSelect01" onChange={handleTypeInputChange} value={previewType} defaultValue='a picture of?'>
           <option selected>a picture of?</option>
           <option value="leaf">leaf</option>
           <option value="flower">flower</option>
@@ -43,18 +57,10 @@ const IdUrl = () => {
           <option value="other">other</option>
         </select>
         <div className="input-group-append">
-          <button className="btn btn-outline-secondary" type="button" onClick={uploadLocal}>Submit</button>
+          <button className="btn btn-outline-secondary" type="button" onClick={addImage}>Add Image</button>
         </div>
       </div>
     )
-  }
-
-  const generateUrlInputForm = (numOfUrlInputGroups) => {
-    const urlInputForm = [];
-    for (let i = 0; i < numOfUrlInputGroups; i++) {
-      urlInputForm.push(generateSingleUrlInput());
-    }
-    return urlInputForm;
   }
 
   return (
@@ -72,21 +78,21 @@ const IdUrl = () => {
       </div>
 
       <div className='row'>
+        {images.length !== 0 ? generateSearchImageThumbnails() : null}
+      </div>
+
+      <div className='row'>
         <div className='col-sm-6 offset-md-3'>
           <div className='mb-3'>
-            <button className="btn btn-primary mr-2" type="button" onClick={addUrlInputGroup}>Add Another Image</button>
             <button className="btn btn-primary" type="button">Get ID</button>
           </div>
-
-          {generateUrlInputForm(numOfImagesForSearch)}
+          {generateUrlInputForm()}
         </div>
       </div>
 
-      
-
       <div className='row'>
-        <div className='col-sm-2 offset-md-3'>
-          <img src={image} alt='' className="img-thumbnail"/>
+        <div className='col-sm-2 offset-md-5'>
+          <img src={previewImage} alt='' className="img-thumbnail"/>
         </div>
       </div>
     </>
