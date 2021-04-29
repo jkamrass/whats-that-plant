@@ -3,6 +3,9 @@ import { useParams, Switch, Route, Link } from 'react-router-dom';
 const QuizMenu = () => {
   return (
     <>
+      <Link to='/'>
+        <button className='btn btn-success btn-lg'>go back</button>
+      </Link>
       <div className="row">
         <div className='col-sm-8 offset-md-2 text-center'>
           <h1>quizzes</h1>

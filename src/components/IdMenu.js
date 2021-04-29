@@ -5,9 +5,16 @@ import IdUrl from './IdUrl'
 const IdMenu = () =>{
   return (
     <>
+      <div className='row'>
+        <div className='col-sm-8-offset-md-2'>
+          <Link to='/'>
+            <button className='btn btn-success btn-lg'>go back</button>
+          </Link>
+        </div>
+      </div>
       <div className="row">
         <div className='col-sm-8 offset-md-2'>
-          <p> at 'what's that plant?' we use photo recognition and machine learning technology to ID plants. How would you prefer to ID yours?</p>
+          <p> at DatPlant we use photo recognition and machine learning technology to ID plants. How would you prefer to ID yours?</p>
         </div>
       </div>
       <div className='row'>

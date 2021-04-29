@@ -48,7 +48,6 @@ const BeginnerScoreCard = ({answer, score, numQuestions}) => {
           </div>
         </div>
       </div>
-      
     </>
   )
 }

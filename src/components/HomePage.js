@@ -9,8 +9,8 @@ const MainPage = () => {
   return (
     <div className='container-fluid'>
       <div className='row'>
-        <div className='col-sm-4 offset-md-4'>
-          <h1>What's That Plant?</h1>
+        <div className='col-sm-2 offset-md-5 text-center'>
+          <img className='img-fluid' src='/DatPlantLogo.jpg' alt=''/>
         </div>
       </div>
       
