@@ -11,13 +11,12 @@ const IdUrl = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   
-  const handleUrlInputChange = (e) => {
-    setPreviewImage(e.target.value);
-  }
-
-  const handleTypeInputChange = (e) => {
-    setPreviewType(e.target.value);
-  }
+  // const handleUrlInputChange = (e) => {
+  //   setPreviewImage(e.target.value);
+  // }
+  // const handleTypeInputChange = (e) => {
+  //   setPreviewType(e.target.value);
+  // }
 
   const handleGetIdClick = () => {
     dispatch(fetchIdResultsUrl(images, types));
@@ -42,13 +41,19 @@ const IdUrl = () => {
     )
   }
 
+  const generateGetIdButton = () => (
+    <div className='col-sm-6 offset-sm-3 text-center'>
+      <button className="btn btn-primary btn-lg" type="button" onClick={handleGetIdClick}>Get ID</button>
+    </div>
+  )
+
   const generateUrlInputForm = () => {
     return (
       <div className="input-group mb-3">
         <div className="input-group mb-3">
-          <input type="text" className="form-control" placeholder="image location (url)" value={previewImage}   aria-label="image url" aria-describedby="basic-addon2" onChange={handleUrlInputChange}/>
+          <input type="text" className="form-control" placeholder="image location (url)" value={previewImage}   aria-label="image url" aria-describedby="basic-addon2" onChange={(e) => setPreviewImage(e.target.value)}/>
         </div>
-        <select className="custom-select" id="inputGroupSelect01" onChange={handleTypeInputChange} value={previewType} defaultValue='a picture of?'>
+        <select className="custom-select" id="inputGroupSelect01" onChange={(e) => setPreviewType(e.target.value)} value={previewType} defaultValue='a picture of?'>
           <option selected>a picture of?</option>
           <option value="leaf">leaf</option>
           <option value="flower">flower</option>
@@ -67,25 +72,24 @@ const IdUrl = () => {
     <>
       <div className='row'>
         <div className='col-sm-8 offset-md-2'>
-          <h3>provide url for upload</h3>
+          <h3>provide url(s) for upload</h3>
+          <p>You can provide up to 5 images of one plant for the id. Please note, our tech works best with photos at least 600x600p</p>
         </div>
       </div>
 
       <div className='row'>
-        <div className='col-sm-8 offset-md-2'>
-          <p>our tech works best with photos at least 600x600p</p>
-        </div>
+        {images.length !== 0 ? generateGetIdButton() : null}
       </div>
 
       <div className='row'>
+        <div className='col-sm-1'>
+
+        </div>
         {images.length !== 0 ? generateSearchImageThumbnails() : null}
       </div>
 
       <div className='row'>
         <div className='col-sm-6 offset-md-3'>
-          <div className='mb-3'>
-            <button className="btn btn-primary" type="button" onClick={handleGetIdClick}>Get ID</button>
-          </div>
           {generateUrlInputForm()}
         </div>
       </div>
