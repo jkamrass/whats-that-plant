@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState } from 'react';
-import { fetchPlantNetPlantIdUrl, fetchIdResultsUrl, updateUserImage } from '../actions'
+import { fetchPlantNetPlantIdUrl, fetchIdResultsUrl, updateUserImages } from '../actions'
 import { useHistory } from 'react-router-dom';
 
 const IdUrl = () => {
@@ -19,9 +19,9 @@ const IdUrl = () => {
     setPreviewType(e.target.value);
   }
 
-  const uploadLocal = () => {
+  const handleGetIdClick = () => {
     dispatch(fetchIdResultsUrl(images, types));
-    dispatch(updateUserImage(images))
+    dispatch(updateUserImages(images))
     history.push('/id/result');
   }
 
@@ -84,7 +84,7 @@ const IdUrl = () => {
       <div className='row'>
         <div className='col-sm-6 offset-md-3'>
           <div className='mb-3'>
-            <button className="btn btn-primary" type="button">Get ID</button>
+            <button className="btn btn-primary" type="button" onClick={handleGetIdClick}>Get ID</button>
           </div>
           {generateUrlInputForm()}
         </div>

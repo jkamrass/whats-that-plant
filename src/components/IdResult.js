@@ -41,6 +41,14 @@ const IdResult = () => {
     }
   }
 
+  const generateUserImagesThumbnails = (userImages) => {
+    return userImages.map((image) => (
+      <div className="col-md-2">
+        <img src={image} alt='' className='img-thumbnail'/>
+      </div>
+    ))
+  }
+
   return (
     <>
       <div className="row">
@@ -109,8 +117,12 @@ const IdResult = () => {
       <div className="row">
         <div className="col-md-6 offset-md-1">
           <h2>Your picture(s):</h2>
-          <img src={userData.userImageUrl} alt='' className='img-thumbnail' width={200}/>
         </div>
+      </div>
+      <div className="row">
+        <div className="col-md-1">
+        </div>
+        {generateUserImagesThumbnails(userData.userImageUrls)}
       </div>
     </>
   )

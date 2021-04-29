@@ -1,7 +1,7 @@
 import axios from "axios";
 export const FETCH_PLANT_NET_PLANT_IDENTIFICATION = "FETCH_PLANT_NET_PLANT_IDENTIFICATION";
 export const FETCH_TREFLE_GAME_INFORMATION = "FETCH_TREFLE_GAME_INFORMATION";
-export const UPDATE_USER_IMAGE = 'UPDATE_USER_IMAGE';
+export const UPDATE_USER_IMAGES = 'UPDATE_USER_IMAGES';
 export const FETCH_TREFLE_INFO_FOR_ID = 'FETCH_TREFLE_INFO_FOR_ID';
 export const UPDATE_ANSWER = 'UPDATE_ANSWER';
 
@@ -113,9 +113,9 @@ export const updateAnswer = (correctAnswer) =>{
   }
 };
 
-export const updateUserImage = (imageUrl) => {
+export const updateUserImages = (imageUrls) => {
   return {
-    type: UPDATE_USER_IMAGE,
-    payload: imageUrl
+    type: UPDATE_USER_IMAGES,
+    payload: imageUrls
   }
 };
