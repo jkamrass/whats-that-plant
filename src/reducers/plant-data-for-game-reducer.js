@@ -1,4 +1,5 @@
 import {FETCH_TREFLE_GAME_INFORMATION, UPDATE_ANSWER} from "../actions/index";
+import _ from 'lodash';
 
 
 const plantDataForGameReducer = (state = [], action) => {
@@ -15,9 +16,8 @@ const plantDataForGameReducer = (state = [], action) => {
 
   switch (action.type) {
     case FETCH_TREFLE_GAME_INFORMATION:
-      console.log(action.payload);
-      debugger;
-      const plantInfoForGame = action.payload.map(plant=> {
+      const numImages = action.payload.numImages;
+      const plantInfoForGame = action.payload.plants.map(plant=> {
           return {
             id: plant.id,
             plantData: {
@@ -29,23 +29,22 @@ const plantDataForGameReducer = (state = [], action) => {
           }
       })
 
-      const plantsDisplayed = imageRandomizer(plantInfoForGame, 5);
+      const plantsDisplayed = imageRandomizer(plantInfoForGame, numImages);
 
       const gameData = {
         plants: plantInfoForGame,
         plantsDisplayed: plantsDisplayed,
-        answer: plantsDisplayed[randomValue(5)].plantData.commonName,
+        answer: plantsDisplayed[randomValue(numImages)].plantData.commonName,
         score: 0,
         numQuestions: 0
       }
-      debugger;
       return gameData;
     
     case UPDATE_ANSWER:
-      const plantDisplay = imageRandomizer(state.plants, 5);
+      const plantDisplay = imageRandomizer(state.plants, 4);
     
       const newTurn = {
-        answer: plantDisplay[randomValue(5)].plantData.commonName,
+        answer: plantDisplay[randomValue(4)].plantData.commonName,
         plantsDisplayed: plantDisplay,
         score: state.score,
         numQuestions: state.numQuestions + 1
@@ -58,9 +57,12 @@ const plantDataForGameReducer = (state = [], action) => {
       // setNumQuestions(numQuestions+1);
       //add to score if payload true
       return {...state, ...newTurn}
+
     default:
       return state;
   }
+
+  
 }
 
 export default plantDataForGameReducer;

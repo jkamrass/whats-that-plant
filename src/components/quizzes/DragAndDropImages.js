@@ -1,14 +1,20 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { QuizData } from './QuizData';
 import _ from 'lodash';
+import Spinner from "react-bootstrap/Spinner";
+import { useDispatch, useSelector } from 'react-redux';
+import {fetchTrefleGameInformation, updateAnswer, updatePlantsDisplayed} from '../../actions/index';
+import { useParams, Switch, Route, Link } from 'react-router-dom';
 
-const AdvancedQuiz = () => {
-  const [choices, setChoices] = useState(_.shuffle(QuizData.plants));
-  const [answers, setAnswers] =useState(_.shuffle(QuizData.plants.map(plant => plant.name)));
+
+const DragAndDropImages = ({gameData, newGame}) => {
+
+  const [choices, setChoices] = useState(_.shuffle(gameData.plantsDisplayed));
+  const [answers, setAnswers] = useState(_.shuffle(gameData.plantsDisplayed));
   const [score, setScore] = useState(0);
-  
+  const [submitted, setSubmitted] = useState(false);
 
   const handleOnDragEnd = (result) =>{
     if (!result.destination) return
@@ -19,20 +25,35 @@ const AdvancedQuiz = () => {
     setChoices(items);
   }
 
+  const submitQuiz = () => {
+    checkScore();
+    setSubmitted(true);
+  }
+
   const checkScore = () => {
-    let rightAnswers = 0;
+    let rightAnswers = [];
     answers.forEach((answer, i)=> {
-      if (answer === choices[i].name){
-        rightAnswers +=1;
+      if (answer === choices[i]){
+        rightAnswers.push(1);
+      } else {
+        rightAnswers.push(0);
       }
     })
-    setScore(rightAnswers);
+    setScore({
+          correct: _.sum(rightAnswers),
+          total: answers.length,
+          byQuestion: rightAnswers
+        })
+  }
+
+  const newSetClickHandler = () => {
+    setSubmitted(false);
+    newGame(choices)
   }
 
   return (
     <>
-      <br></br>
-      <DragDropContext onDragEnd={handleOnDragEnd}>
+    <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId='plants' direction='horizontal'>
           {(provided) => (
             <>
@@ -40,11 +61,11 @@ const AdvancedQuiz = () => {
               {choices.map((plant, index) => {
                 return (
                   <div className='col-sm-2'>
-                    <Draggable key={plant.id} draggableId={plant.id} index={index}>
+                    <Draggable key={plant.id} draggableId={plant.plantData.commonName} id={plant.id} index={index}>
                     {(provided) => (
                       <li ref ={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className='list-group-item'>
                         <div>
-                          <img src={plant.image} alt={`${plant.name}`} className='img-fluid'/>
+                          <img src={plant.plantData.imageUrl} alt={`${plant.plantData.commonName}`} className='img-fluid'/>
                         </div>
                       </li>
                     )}
@@ -59,11 +80,11 @@ const AdvancedQuiz = () => {
         </Droppable>
       </DragDropContext>
       <div className='row'>
-          {answers.map(answer => {
+          {answers.map((answer, index) => {
             return (
               <>
                 <div className='col-sm-2'>
-                  <h3>{answer}</h3>
+                  <h3 style={submitted ? {color: score.byQuestion[index] ? 'black': 'red'} : null}>{answer.plantData.commonName}</h3>
                 </div>
               </>
             )
@@ -71,12 +92,12 @@ const AdvancedQuiz = () => {
       </div>
       <div className='row'>
         <div className='col-sm-4 offset-md-4 text-center'>
-          <button className='btn btn-success btn-lg' onClick={checkScore}>Submit</button>
-          <h3>your score: {score/answers.length*100}%</h3>
+          {submitted ? null : <button className='btn btn-success btn-lg' onClick={submitQuiz}>Submit</button>}
+          {score ? <h3>your score: {score.correct}/{score.total}</h3> : null}
         </div>
       </div>
-    </>
+      </>
   )
 }
 
-export default AdvancedQuiz;
+export default DragAndDropImages;

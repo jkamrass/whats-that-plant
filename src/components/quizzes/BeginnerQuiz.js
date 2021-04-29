@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import {fetchTrefleGameInformation, updateAnswer} from '../../actions/index';
 import { useDispatch, useSelector } from 'react-redux';
 import Spinner from "react-bootstrap/Spinner";
+import { useParams, Switch, Route, Link } from 'react-router-dom';
 
 const BeginnerQuiz = () => {
   const gameData = useSelector(state => state.plantDataForGame)
@@ -13,7 +14,7 @@ const BeginnerQuiz = () => {
   const dispatch = useDispatch();
   
   useEffect(()=>{
-    dispatch(fetchTrefleGameInformation());
+    dispatch(fetchTrefleGameInformation(4));
   }, [])
 
 
@@ -43,12 +44,15 @@ const BeginnerQuiz = () => {
 
   return (
     <>
+      <Link to='/quiz'>
+        <button className='btn btn-success btn-lg'>go back</button>
+      </Link>
       <div className = 'row'>
         <div className='col-sm-8 offset-md-2'>
-          <h1>sprout's quiz</h1>
+          <h1>green thumb's quiz</h1>
         </div>
       </div>
-
+      <div></div>
       <ImageChoices answer={gameData.answer} score={gameData.score} numQuestions={gameData.numQuestions} gameData={gameData} chooseAnswer={chooseAnswer}/>
       <BeginnerScoreCard answer={gameData.answer} score={gameData.score} numQuestions={gameData.numQuestions}/>
     </>
