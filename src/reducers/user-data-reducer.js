@@ -1,11 +1,10 @@
-import { UPDATE_USER_IMAGE } from '../actions/index';
+import { UPDATE_USER_IMAGES } from '../actions/index';
 
 const userDataReducer = (state={}, action) => {
   switch (action.type) {
-    case UPDATE_USER_IMAGE:
-      //Grabs the first and most likely returned object (TODO: Could change to return multiple if there are multiple possible matches in the future)
+    case UPDATE_USER_IMAGES:
       const userData = {
-        userImageUrl: action.payload
+        userImageUrls: action.payload
       }
       return userData;
     default:

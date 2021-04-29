@@ -1,7 +1,7 @@
 import axios from "axios";
 export const FETCH_PLANT_NET_PLANT_IDENTIFICATION = "FETCH_PLANT_NET_PLANT_IDENTIFICATION";
 export const FETCH_TREFLE_GAME_INFORMATION = "FETCH_TREFLE_GAME_INFORMATION";
-export const UPDATE_USER_IMAGE = 'UPDATE_USER_IMAGE';
+export const UPDATE_USER_IMAGES = 'UPDATE_USER_IMAGES';
 export const FETCH_TREFLE_INFO_FOR_ID = 'FETCH_TREFLE_INFO_FOR_ID';
 export const UPDATE_ANSWER = 'UPDATE_ANSWER';
 
@@ -52,8 +52,11 @@ export const fetchTrefleInfoForId = (scientificName) => {
 export const fetchIdResultsLocal = async (images, organsDisplayedinImages, userImage, guessedCategoryForPlant) => {
   const baseUrl = `https://my-api.plantnet.org/v2/identify/all?api-key=${process.env.REACT_APP_PLANT_NET_API_KEY}`;
   let form = new FormData();
-  form.append('organs', organsDisplayedinImages[0]);
-  form.append('images', images[0])
+  for (let i = 0; i < images.length; i++) {
+    form.append('organs', organsDisplayedinImages[0]);
+    form.append('images', images[0].image)
+  }
+
   //form.append('images', fs.createReadStream(images[i]));
   const idRequest = await axios.post(baseUrl, form);
   const matchScore = idRequest.data.results[0].score;
@@ -113,9 +116,9 @@ export const updateAnswer = (correctAnswer) =>{
   }
 };
 
-export const updateUserImage = (imageUrl) => {
+export const updateUserImages = (imageUrls) => {
   return {
-    type: UPDATE_USER_IMAGE,
-    payload: imageUrl
+    type: UPDATE_USER_IMAGES,
+    payload: imageUrls
   }
 };

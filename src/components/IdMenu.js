@@ -15,8 +15,8 @@ const IdMenu = () =>{
           <h3>I'd like to...</h3>
         </div>
       </div>
-      <div className='row'>
-        <div className='col-sm-1 offset-md-5'>
+      <div className='row text-center'>
+        <div className='col-sm-2 offset-md-4'>
           <Link to='/id/url'>
             <button className='btn btn-success btn-xl'>use photo url</button>
           </Link>
