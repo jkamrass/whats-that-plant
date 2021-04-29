@@ -1,5 +1,6 @@
 import { QuizData } from './QuizData';
 import BeginnerScoreCard from './BeginnerScoreCard';
+import ImageChoices from './ImageChoices';
 import React, { useState, useEffect } from 'react';
 import {fetchTrefleGameInformation, updateAnswer} from '../../actions/index';
 import { useDispatch, useSelector } from 'react-redux';
@@ -48,17 +49,7 @@ const BeginnerQuiz = () => {
         </div>
       </div>
 
-      <div className = 'row'>
-        <div className='col-sm-8 offset-md-2'>
-          {gameData.plantsDisplayed.map((plant) => {
-            return (
-              <span className = 'border border-success rounded border-4' key={plant.id}>
-                <img src={plant.plantData.imageUrl} alt={plant.plantData.commonName} width = {155} onClick={chooseAnswer}/>
-              </span>
-            )
-          })}
-        </div>
-      </div>
+      <ImageChoices answer={gameData.answer} score={gameData.score} numQuestions={gameData.numQuestions} gameData={gameData} chooseAnswer={chooseAnswer}/>
       <BeginnerScoreCard answer={gameData.answer} score={gameData.score} numQuestions={gameData.numQuestions}/>
     </>
       

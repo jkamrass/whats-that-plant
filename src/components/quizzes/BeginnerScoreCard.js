@@ -1,3 +1,6 @@
+import { useParams, Switch, Route, Link } from 'react-router-dom';
+
+
 const BeginnerScoreCard = ({answer, score, numQuestions}) => {
   const writeGameMessage = (score) => {
     switch (true){
@@ -39,8 +42,13 @@ const BeginnerScoreCard = ({answer, score, numQuestions}) => {
       <div className = 'row'>
         <div className='col-sm-8 offset-md-2'>
           <h3>{writeGameMessage(score)}</h3>
-          <h1>Your score:</h1>
-          <h1>{score}/{numQuestions}</h1>
+          <div className='border border-success'>
+            <h1>Your score:</h1>
+            <h1>{score}/{numQuestions}</h1>
+          </div>
+          <Link to='/quiz'>
+            <button className='btn btn-success btn-sm'>back</button>
+          </Link>
         </div>
       </div>
       
