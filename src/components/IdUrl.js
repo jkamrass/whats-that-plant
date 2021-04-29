@@ -5,9 +5,9 @@ import { useHistory } from 'react-router-dom';
 
 const IdUrl = () => {
   const [images, setImages] = useState([]);
+  const [types, setTypes] = useState([]);
   const [previewImage, setPreviewImage] = useState(null);
   const [previewType, setPreviewType] = useState('a picture of?');
-  const [types, setTypes] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
   
@@ -78,26 +78,21 @@ const IdUrl = () => {
       </div>
 
       <div className='row'>
+        <div className='col-sm-5 offset-sm-3'>
+          {images.length < 5 ? generateUrlInputForm() : <h3>Max Number of Images Reached</h3>}
+        </div>
+        <div className="col-sm-2">
+          <img src={previewImage} alt='' className="img-thumbnail"/>
+        </div>
+      </div>
+
+      <div className='row'>
         {images.length !== 0 ? generateGetIdButton() : null}
       </div>
 
-      <div className='row'>
-        <div className='col-sm-1'>
-
-        </div>
+      <div className='row mb-5'>
+        <div className='col-sm-1'></div>
         {images.length !== 0 ? generateSearchImageThumbnails() : null}
-      </div>
-
-      <div className='row'>
-        <div className='col-sm-6 offset-md-3'>
-          {generateUrlInputForm()}
-        </div>
-      </div>
-
-      <div className='row'>
-        <div className='col-sm-2 offset-md-5'>
-          <img src={previewImage} alt='' className="img-thumbnail"/>
-        </div>
       </div>
     </>
   );
