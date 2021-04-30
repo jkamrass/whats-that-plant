@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from "react-redux"
 import { fetchTrefleInfoForId } from '../actions'
 import Spinner from "react-bootstrap/Spinner";
+import {BOTH_FETCHES_FAILED} from '../actions';
+import NoResultsError from "./NoResultsError";
 
 const IdResult = () => {
   const idResults = useSelector(state => state.plantIdResults);
@@ -13,6 +15,13 @@ const IdResult = () => {
         <Spinner animation="border" />
         Loading...
       </div>
+    )
+  }
+
+
+  if(idResults.error === BOTH_FETCHES_FAILED) {
+    return (
+      <NoResultsError/>
     )
   }
 

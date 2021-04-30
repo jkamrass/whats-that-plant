@@ -7,6 +7,7 @@ export const UPDATE_ANSWER = 'UPDATE_ANSWER';
 export const UPDATE_PLANTS_DISPLAYED = 'UPDATE_PLANTS_DISPLAYED';
 export const TREFLE_FETCH_FAILED = "TREFLE_FETCH_FAILED";
 export const BOTH_FETCHES_FAILED = "BOTH_FETCHES_FAILED";
+export const RESET_ID_SEARCH = "RESET_ID_SEARCH";
 
 // Sends a get request to plant net for a plant identification based upon remote image urls
 export const fetchPlantNetPlantIdUrl = (imageUrlsForPlant, organsDisplayedinImages, guessedCategoryForPlant) => {
@@ -74,19 +75,24 @@ export const fetchIdResultsLocal = (images, organsDisplayedinImages) => {
         return {...trefleRequest, match: matchScore}
 
       } catch (e) {
-        debugger;
         console.error(e)
-        return {
-          type: TREFLE_FETCH_FAILED,
-          payload: idRequest
+        const plantNetData = idRequest.data.results[0];
+        const idInfo = {
+          matchScore: plantNetData.score,
+          scientificName: plantNetData.species.scientificNameWithoutAuthor,
+          commonNames: plantNetData.species.commonNames,
+          family: plantNetData.species.family.scientificNameWithoutAuthor,
+          genus: plantNetData.species.genus.scientificNameWithoutAuthor,
+          commonName: plantNetData.species.commonNames[0],
+          primaryImage: `https://lh3.googleusercontent.com/proxy/kTSSCElmlybfSkvwwF0EuE_OMZ1BQkUm6xa3HGYhnYsbCXBGohx3JgsybIPyNhWi_WZViY1OA8BviTMCaH8IAphOICJkVzhCtaLHTHjJTvjxSL834tXmfUlOE8F50nR_pw`,
+          error: TREFLE_FETCH_FAILED
         }
+        debugger;
+        return idInfo;
       }
     } catch (e) {
-      debugger;
       console.error(e)
-      return {
-        type: BOTH_FETCHES_FAILED
-      }
+      return {error: BOTH_FETCHES_FAILED}
     }
   }
 
@@ -139,6 +145,12 @@ export const fetchIdResultsUrl = (imageUrlsForPlant, organsDisplayedinImages) =>
   return {
     type: FETCH_TREFLE_INFO_FOR_ID,
     payload: fetchStuff(imageUrlsForPlant, organsDisplayedinImages)
+  }
+}
+
+export const resetIdSearch = () => {
+  return {
+    type: RESET_ID_SEARCH
   }
 }
 

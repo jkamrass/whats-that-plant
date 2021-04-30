@@ -1,4 +1,4 @@
-import { BOTH_FETCHES_FAILED, FETCH_PLANT_NET_PLANT_IDENTIFICATION, FETCH_TREFLE_INFO_FOR_ID, TREFLE_FETCH_FAILED } from '../actions/index';
+import { BOTH_FETCHES_FAILED, FETCH_PLANT_NET_PLANT_IDENTIFICATION, FETCH_TREFLE_INFO_FOR_ID, TREFLE_FETCH_FAILED, RESET_ID_SEARCH } from '../actions/index';
 
 const plantIdResultsReducer = (state={}, action) => {
   switch (action.type) {
@@ -39,6 +39,10 @@ const plantIdResultsReducer = (state={}, action) => {
         debugger;
         return action.payload.error === TREFLE_FETCH_FAILED ? action.payload : {error: BOTH_FETCHES_FAILED}
       }
+    
+    case RESET_ID_SEARCH:
+      debugger;
+      return {}
 
     default:
       return state;
