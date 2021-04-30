@@ -1,7 +1,7 @@
 import { useParams, Switch, Route, Link } from 'react-router-dom';
 import QuizMenu from './QuizMenu';
-import MultipleChoiceQuiz from './quizzes/MultipleChoiceQuiz';
-import DragAndDropQuiz from './quizzes/DragAndDropQuiz';
+import MultipleChoiceQuiz from './MultipleChoiceQuiz';
+import DragAndDropQuiz from './DragAndDropQuiz';
 
 
 const QuizContainer = () => {

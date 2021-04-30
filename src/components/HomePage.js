@@ -1,9 +1,9 @@
 import { useParams, Switch, Route, Link } from 'react-router-dom';
 import MainMenu from './MainMenu';
-import IdMenu from './IdMenu';
+import IdMenu from './idComponents/IdMenu';
 
-import QuizContainer from './QuizContainer';
-import IdContainer from './IdContainer';
+import QuizContainer from './quizzes/QuizContainer';
+import IdContainer from './idComponents/IdContainer';
 
 const MainPage = () => {
   return (

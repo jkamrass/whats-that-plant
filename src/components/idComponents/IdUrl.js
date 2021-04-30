@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
-import { fetchPlantNetPlantIdUrl, fetchIdResultsUrl, updateUserImages, resetIdSearch } from '../actions'
+import { fetchPlantNetPlantIdUrl, fetchIdResultsUrl, updateUserImages, resetIdSearch } from '../../actions'
 import { useHistory } from 'react-router-dom';
 import PreviewImage from './PreviewImage';
 import { useForm } from "react-hook-form";

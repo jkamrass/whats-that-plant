@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
-import { fetchIdResultsLocal, fetchPlantNetPlantIdLocal, updateUserImages, resetIdSearch } from '../actions/index';
+import { fetchIdResultsLocal, fetchPlantNetPlantIdLocal, updateUserImages, resetIdSearch } from '../../actions/index';
 import { useHistory } from 'react-router-dom';
 import PreviewImage from './PreviewImage';
 import SearchImageThumbnail from './SearchImageThumbnail';
