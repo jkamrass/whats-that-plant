@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from "react-redux"
-import { fetchTrefleInfoForId, resetIdSearch } from '../actions'
 import Spinner from "react-bootstrap/Spinner";
 import {BOTH_FETCHES_FAILED} from '../actions';
 import NoResultsError from "./NoResultsError";
@@ -9,7 +8,6 @@ import {Link} from "react-router-dom";
 const IdResult = () => {
   const idResults = useSelector(state => state.plantIdResults);
   const userData = useSelector(state => state.userData)
-  const dispatch = useDispatch();
 
   if(Object.keys(idResults).length === 0) {
     return (
@@ -19,7 +17,6 @@ const IdResult = () => {
       </div>
     )
   }
-
 
   if(idResults.error === BOTH_FETCHES_FAILED) {
     return (
@@ -33,10 +30,6 @@ const IdResult = () => {
         <img src={image} alt='' className='img-thumbnail'/>
       </div>
     ))
-  }
-
-  const handleLinkClick = () => {
-    dispatch(resetIdSearch());
   }
 
   return (

@@ -20,18 +20,10 @@ const IdUrl = () => {
 
   const [images, setImages] = useState([]);
   const [types, setTypes] = useState([]);
-  // const [previewImage, setPreviewImage] = useState(null);
-  // const [previewType, setPreviewType] = useState('a picture of?');
   const dispatch = useDispatch();
   const history = useHistory();
-  
-  // const handleUrlInputChange = (e) => {
-  //   setPreviewImage(e.target.value);
-  // }
-  // const handleTypeInputChange = (e) => {
-  //   setPreviewType(e.target.value);
-  // }
 
+  // Resets the search store to blank in case any previous data is there
   useEffect(() => dispatch(resetIdSearch()), []);
 
   const handleGetIdClick = () => {
@@ -56,7 +48,7 @@ const IdUrl = () => {
 
   const generateGetIdButton = () => (
     <div className='col-sm-6 offset-sm-3 text-center'>
-      <button className="btn btn-primary btn-lg" type="button" onClick={handleGetIdClick}>Get ID</button>
+      <button className="btn btn-success btn-lg" type="button" onClick={handleGetIdClick}>Get ID</button>
     </div>
   )
 
