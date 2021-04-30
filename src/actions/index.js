@@ -8,6 +8,7 @@ export const UPDATE_PLANTS_DISPLAYED = 'UPDATE_PLANTS_DISPLAYED';
 export const TREFLE_FETCH_FAILED = "TREFLE_FETCH_FAILED";
 export const BOTH_FETCHES_FAILED = "BOTH_FETCHES_FAILED";
 export const RESET_ID_SEARCH = "RESET_ID_SEARCH";
+export const RESET_GAME_INFORMATION = "RESET_GAME_INFORMATION";
 
 // Sends a get request to plant net for a plant identification based upon remote image urls
 export const fetchPlantNetPlantIdUrl = (imageUrlsForPlant, organsDisplayedinImages, guessedCategoryForPlant) => {
@@ -174,6 +175,12 @@ export const fetchTrefleGameInformation = async (numImagesToDisplay) => {
       plants: plantsList,
       numImages: numImagesToDisplay 
     }
+  }
+}
+
+export const resetGameInformation = () => {
+  return {
+    type: RESET_GAME_INFORMATION
   }
 }
 

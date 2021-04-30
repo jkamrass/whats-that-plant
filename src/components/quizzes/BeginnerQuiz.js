@@ -2,7 +2,7 @@ import { QuizData } from './QuizData';
 import BeginnerScoreCard from './BeginnerScoreCard';
 import ImageChoices from './ImageChoices';
 import React, { useState, useEffect } from 'react';
-import {fetchTrefleGameInformation, updateAnswer} from '../../actions/index';
+import {fetchTrefleGameInformation, resetGameInformation, updateAnswer} from '../../actions/index';
 import { useDispatch, useSelector } from 'react-redux';
 import Spinner from "react-bootstrap/Spinner";
 import { useParams, Switch, Route, Link } from 'react-router-dom';
@@ -14,6 +14,7 @@ const BeginnerQuiz = () => {
   const dispatch = useDispatch();
   
   useEffect(()=>{
+    dispatch(resetGameInformation());
     dispatch(fetchTrefleGameInformation(4));
   }, [])
 

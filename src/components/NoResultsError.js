@@ -15,10 +15,10 @@ const NoResultsError = () => {
         <h3>No Results Found</h3>
         <p>Please check your images</p>
         <Link to='/id'>
-              <button className='btn btn-success mr-3' onClick={handleClick}>New Search</button>
+              <button className='btn btn-success mr-3'>New Search</button>
         </Link>
         <Link to='/'>
-              <button className='btn btn-success' onClick={handleClick}>Home Page</button>
+              <button className='btn btn-success'>Home Page</button>
         </Link>
       </div>
     </div>

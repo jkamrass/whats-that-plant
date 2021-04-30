@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useState } from 'react';
-import { fetchIdResultsLocal, fetchPlantNetPlantIdLocal, updateUserImages } from '../actions/index';
+import React, { useEffect, useState } from 'react';
+import { fetchIdResultsLocal, fetchPlantNetPlantIdLocal, updateUserImages, resetIdSearch } from '../actions/index';
 import { useHistory } from 'react-router-dom';
 import PreviewImage from './PreviewImage';
 import SearchImageThumbnail from './SearchImageThumbnail';
@@ -13,6 +13,8 @@ const IdLocal = () => {
   const [previewType, setPreviewType] = useState('leaf');
   const dispatch = useDispatch();
   const history = useHistory();
+
+  useEffect(() => dispatch(resetIdSearch()), [])
   
   const handleFileInput = (e) => {
     debugger;

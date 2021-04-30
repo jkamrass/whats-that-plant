@@ -56,13 +56,13 @@ const IdResult = () => {
           </h1>
           <IdResultTable idResults={idResults}/>
           <Link to='/id'>
-              <button className='btn btn-success mr-3' onClick={handleLinkClick}>New Search</button>
+              <button className='btn btn-success mr-3'>New Search</button>
           </Link>
           <Link to='/'>
-              <button className='btn btn-success mr-3' onClick={handleLinkClick}>Home Page</button>
+              <button className='btn btn-success mr-3'>Home Page</button>
           </Link>
           <Link to='/quiz'>
-              <button className='btn btn-success mr-3' onClick={handleLinkClick}>Ready for a quiz?</button>
+              <button className='btn btn-success mr-3'>Ready for a quiz?</button>
           </Link>
         </div>
         <div className="col-md-5">
