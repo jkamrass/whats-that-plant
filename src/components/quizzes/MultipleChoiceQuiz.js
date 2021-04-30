@@ -67,9 +67,9 @@ const MultipleChoiceQuiz = () => {
         </div>
       </div>
       <div></div>
-      <MultipleChoiceImage answer={gameData.answer} score={gameData.score} numQuestions={gameData.numQuestions} gameData={gameData} chooseAnswer={chooseAnswer} showAnswer={showAnswer}/>
+      <MultipleChoiceImage gameData={gameData} chooseAnswer={chooseAnswer} showAnswer={showAnswer}/>
       {generateNextQuestionButton()}
-      <MultipleChoiceScore answer={gameData.answer} score={gameData.score} numQuestions={gameData.numQuestions}/>
+      <MultipleChoiceScore gameData={gameData}/>
       
     </>
       

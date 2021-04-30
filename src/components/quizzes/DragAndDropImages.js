@@ -3,10 +3,10 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import _ from 'lodash';
 
 
-const DragAndDropImages = ({gameData, newGame}) => {
+const DragAndDropImages = ({gameData}) => {
 
   const [choices, setChoices] = useState(_.shuffle(gameData.plantsDisplayed));
-  const [answers, setAnswers] = useState(_.shuffle(gameData.plantsDisplayed));
+  const [answers] = useState(_.shuffle(gameData.plantsDisplayed));
   const [score, setScore] = useState(0);
   const [submitted, setSubmitted] = useState(false);
 
