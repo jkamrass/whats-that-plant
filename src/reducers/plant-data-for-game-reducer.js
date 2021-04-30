@@ -1,4 +1,4 @@
-import {FETCH_TREFLE_GAME_INFORMATION, UPDATE_ANSWER} from "../actions/index";
+import {FETCH_TREFLE_GAME_INFORMATION, RESET_GAME_INFORMATION, UPDATE_ANSWER} from "../actions/index";
 import _ from 'lodash';
 
 
@@ -57,6 +57,9 @@ const plantDataForGameReducer = (state = [], action) => {
       // setNumQuestions(numQuestions+1);
       //add to score if payload true
       return {...state, ...newTurn}
+    
+    case RESET_GAME_INFORMATION:
+      return [];
 
     default:
       return state;

@@ -5,7 +5,7 @@ import { QuizData } from './QuizData';
 import _ from 'lodash';
 import Spinner from "react-bootstrap/Spinner";
 import { useDispatch, useSelector } from 'react-redux';
-import {fetchTrefleGameInformation, updateAnswer, updatePlantsDisplayed, fetchNewDNDImages} from '../../actions/index';
+import {fetchTrefleGameInformation, updateAnswer, updatePlantsDisplayed, fetchNewDNDImages, resetGameInformation} from '../../actions/index';
 import DragAndDropImages from './DragAndDropImages';
 import { useParams, Switch, Route, Link } from 'react-router-dom';
 
@@ -14,6 +14,7 @@ const DragAndDropQuiz = () => {
   const dispatch = useDispatch();
   
   useEffect(()=>{
+    dispatch(resetGameInformation());
     dispatch(fetchTrefleGameInformation(6));
   }, [])
 

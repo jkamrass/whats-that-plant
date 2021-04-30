@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useState } from 'react';
-import { fetchIdResultsLocal, fetchPlantNetPlantIdLocal, updateUserImages } from '../actions/index';
+import React, { useEffect, useState } from 'react';
+import { fetchIdResultsLocal, fetchPlantNetPlantIdLocal, updateUserImages, resetIdSearch } from '../actions/index';
 import { useHistory } from 'react-router-dom';
 import PreviewImage from './PreviewImage';
 import SearchImageThumbnail from './SearchImageThumbnail';
@@ -10,11 +10,14 @@ const IdLocal = () => {
   const [images, setImages] = useState([]);
   const [types, setTypes] = useState([]);
   const [previewImage, setPreviewImage] = useState(null);
-  const [previewType, setPreviewType] = useState('a picture of?');
+  const [previewType, setPreviewType] = useState('leaf');
   const dispatch = useDispatch();
   const history = useHistory();
+
+  useEffect(() => dispatch(resetIdSearch()), [])
   
   const handleFileInput = (e) => {
+    debugger;
     //Makes sure there is actually a file. If someone closes the browse file without choosing a file it will still trigger this event.
     if (!e.target.files.length) {
       return;
@@ -35,6 +38,8 @@ const IdLocal = () => {
       image: e.target.files[0],
       imageUrl: URL.createObjectURL(e.target.files[0])
     })
+
+    e.target.value = null;
     //setImage();
     //setPreviewImage(URL.createObjectURL(e.target.files[0]))
   }
@@ -44,7 +49,7 @@ const IdLocal = () => {
     setImages(images.concat(previewImage));
     setTypes(types.concat(previewType));
     setPreviewImage(null);
-    setPreviewType('a picture of?')
+    setPreviewType('leaf');
   }
 
   const deleteImage = (indexOfImageToBeDeleted) => {
@@ -75,7 +80,7 @@ const IdLocal = () => {
           <input type='file' onChange={handleFileInput} id='inputGroupFile01'/>
           <label className="custom-file-label" htmlFor="inputGroupFile01">Choose file</label>
         </div>
-        <select className="custom-select" id="inputGroupSelect01" onChange={(e) => setPreviewType(e.target.value)} defaultValue='a picture of?'>
+        <select className="custom-select" id="inputGroupSelect01" onChange={(e) => setPreviewType(e.target.value)} value={previewType}>
           <option value="leaf">leaf</option>
           <option value="flower">flower</option>
           <option value="fruit">fruit</option>

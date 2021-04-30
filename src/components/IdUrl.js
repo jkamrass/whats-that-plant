@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useState } from 'react';
-import { fetchPlantNetPlantIdUrl, fetchIdResultsUrl, updateUserImages } from '../actions'
+import React, { useEffect, useState } from 'react';
+import { fetchPlantNetPlantIdUrl, fetchIdResultsUrl, updateUserImages, resetIdSearch } from '../actions'
 import { useHistory } from 'react-router-dom';
 import PreviewImage from './PreviewImage';
 import { useForm } from "react-hook-form";
@@ -31,6 +31,8 @@ const IdUrl = () => {
   // const handleTypeInputChange = (e) => {
   //   setPreviewType(e.target.value);
   // }
+
+  useEffect(() => dispatch(resetIdSearch()), []);
 
   const handleGetIdClick = () => {
     dispatch(fetchIdResultsUrl(images, types));

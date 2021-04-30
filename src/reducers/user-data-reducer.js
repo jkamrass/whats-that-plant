@@ -1,4 +1,4 @@
-import { UPDATE_USER_IMAGES } from '../actions/index';
+import { UPDATE_USER_IMAGES, RESET_ID_SEARCH } from '../actions/index';
 
 const userDataReducer = (state={}, action) => {
   switch (action.type) {
@@ -7,6 +7,8 @@ const userDataReducer = (state={}, action) => {
         userImageUrls: action.payload
       }
       return userData;
+    case RESET_ID_SEARCH:
+      return {}
     default:
       return state;
   }
