@@ -1,12 +1,6 @@
-import React, { Component, useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState} from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { QuizData } from './QuizData';
 import _ from 'lodash';
-import Spinner from "react-bootstrap/Spinner";
-import { useDispatch, useSelector } from 'react-redux';
-import {fetchTrefleGameInformation, updateAnswer, updatePlantsDisplayed} from '../../actions/index';
-import { useParams, Switch, Route, Link } from 'react-router-dom';
 
 
 const DragAndDropImages = ({gameData, newGame}) => {
@@ -44,11 +38,6 @@ const DragAndDropImages = ({gameData, newGame}) => {
           total: answers.length,
           byQuestion: rightAnswers
         })
-  }
-
-  const newSetClickHandler = () => {
-    setSubmitted(false);
-    newGame(choices)
   }
 
   return (

@@ -1,10 +1,8 @@
 import axios from "axios";
-export const FETCH_PLANT_NET_PLANT_IDENTIFICATION = "FETCH_PLANT_NET_PLANT_IDENTIFICATION";
 export const FETCH_TREFLE_GAME_INFORMATION = "FETCH_TREFLE_GAME_INFORMATION";
 export const UPDATE_USER_IMAGES = 'UPDATE_USER_IMAGES';
-export const FETCH_TREFLE_INFO_FOR_ID = 'FETCH_TREFLE_INFO_FOR_ID';
+export const FETCH_ID_RESULTS = 'FETCH_ID_RESULTS';
 export const UPDATE_ANSWER = 'UPDATE_ANSWER';
-export const UPDATE_PLANTS_DISPLAYED = 'UPDATE_PLANTS_DISPLAYED';
 export const TREFLE_FETCH_FAILED = "TREFLE_FETCH_FAILED";
 export const BOTH_FETCHES_FAILED = "BOTH_FETCHES_FAILED";
 export const RESET_ID_SEARCH = "RESET_ID_SEARCH";
@@ -56,7 +54,7 @@ export const fetchIdResultsLocal = (images, organsDisplayedinImages) => {
   }
 
   return {
-    type: FETCH_TREFLE_INFO_FOR_ID,
+    type: FETCH_ID_RESULTS,
     payload: fetchStuff(images, organsDisplayedinImages)
   }
 }
@@ -103,7 +101,7 @@ export const fetchIdResultsUrl = (imageUrlsForPlant, organsDisplayedinImages) =>
   }
   // const baseUrl = `https://my-api.plantnet.org/v2/identify/all?api-key=${process.env.REACT_APP_PLANT_NET_API_KEY}&images=https%3A%2F%2Fmy.plantnet.org%2Fimages%2Fimage_1.jpeg&images=https%3A%2F%2Fmy.plantnet.org%2Fimages%2Fimage_2.jpeg&organs=flower&organs=leaf`
   return {
-    type: FETCH_TREFLE_INFO_FOR_ID,
+    type: FETCH_ID_RESULTS,
     payload: fetchStuff(imageUrlsForPlant, organsDisplayedinImages)
   }
 }
