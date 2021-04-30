@@ -82,7 +82,7 @@ const DragAndDropImages = ({gameData}) => {
       <div className='row'>
         <div className='col-sm-4 offset-md-4 text-center'>
           {submitted ? null : <button className='btn btn-success btn-lg' onClick={submitQuiz}>Submit</button>}
-          {score ? <h3>your score: {score.correct}/{score.total}</h3> : null}
+          {score ? <h3>Your Score: {score.correct}/{score.total}</h3> : null}
         </div>
       </div>
       </>

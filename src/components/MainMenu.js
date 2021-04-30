@@ -6,7 +6,7 @@ const MainMenu = () => {
     <>
     <div className="row">
         <div className='col-sm-8 offset-md-2'>
-          <p>ever see a plant and want to know what it is? want to increase your knowledge of the plant kingdom in general? we got your back.</p>
+          <p>Ever see a plant and want to know what it is? Want to increase your knowledge of the plant kingdom in general? We got your back.</p>
         </div>
       </div>
       <div className='row'>

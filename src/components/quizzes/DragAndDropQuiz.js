@@ -17,7 +17,7 @@ const DragAndDropQuiz = () => {
 
   if(gameData.length === 0) {
     return (
-      <div>
+      <div className="text-center">
         <Spinner animation="border" />
         Loading...
       </div>
@@ -27,9 +27,9 @@ const DragAndDropQuiz = () => {
   return (
     <>
       <Link to='/quiz'>
-        <button className='btn btn-success'>go back</button>
+        <button className='btn btn-success'>Go Back</button>
       </Link>
-      <h1>sprout's quiz</h1>
+      <h1>Sprout's Quiz</h1>
       <br></br>
       <DragAndDropImages gameData={gameData}/>
     </>

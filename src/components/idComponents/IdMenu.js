@@ -1,6 +1,4 @@
-import { useParams, Switch, Route, Link } from 'react-router-dom';
-import IdLocal from './IdLocal';
-import IdUrl from './IdUrl'
+import { Link } from 'react-router-dom';
 
 const IdMenu = () =>{
   return (
@@ -8,13 +6,13 @@ const IdMenu = () =>{
       <div className='row'>
         <div className='col-sm-8 offset-md-2'>
           <Link to='/'>
-            <button className='btn btn-success'>go back</button>
+            <button className='btn btn-success'>Go Back</button>
           </Link>
         </div>
       </div>
       <div className="row">
         <div className='col-sm-8 offset-md-2'>
-          <p> at DatPlant we use photo recognition and machine learning technology to ID plants. How would you prefer to ID yours?</p>
+          <p> At DatPlant we use photo recognition and machine learning to ID plants. How would you prefer to ID yours?</p>
         </div>
       </div>
       <div className='row'>
@@ -25,12 +23,12 @@ const IdMenu = () =>{
       <div className='row text-center'>
         <div className='col-sm-2 offset-md-4'>
           <Link to='/id/url'>
-            <button className='btn btn-success btn-xl'>use photo url</button>
+            <button className='btn btn-success btn-xl'>Use Photo Url</button>
           </Link>
         </div>
         <div className='col-sm-2'>
           <Link to='/id/local'>
-            <button className='btn btn-success btn-xl'>upload my own photo</button>
+            <button className='btn btn-success btn-xl'>Upload My Own Photo</button>
           </Link>
         </div>
       </div>

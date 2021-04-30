@@ -4,7 +4,6 @@ import IdLocal from './IdLocal';
 import IdUrl from './IdUrl';
 import IdResult from './IdResult';
 
-
 const IdContainer = () => {
   return (
     <Switch>

@@ -21,7 +21,7 @@ const MultipleChoiceQuiz = () => {
 
   if(gameData.length === 0) {
     return (
-      <div>
+      <div className="text-center">
         <Spinner animation="border" />
         Loading...
       </div>
@@ -49,7 +49,7 @@ const MultipleChoiceQuiz = () => {
       return (
         <div className='row'>
           <div className = 'col-sm-4 offset-md-4 text-center'>
-            {showAnswer ? <button className='btn btn-success' onClick={nextQuestion}>next question</button>: null}
+            {showAnswer ? <button className='btn btn-success' onClick={nextQuestion}>Next Question</button>: null}
           </div>
         </div>
       )
@@ -59,11 +59,11 @@ const MultipleChoiceQuiz = () => {
   return (
     <>
       <Link to='/quiz'>
-        <button className='btn btn-success'>go back</button>
+        <button className='btn btn-success'>Go Back</button>
       </Link>
       <div className = 'row'>
         <div className='col-sm-8 offset-md-2'>
-          <h1>green thumb's quiz</h1>
+          <h1>Green Thumb's Quiz</h1>
         </div>
       </div>
       <div></div>

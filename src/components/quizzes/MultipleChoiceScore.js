@@ -19,14 +19,14 @@ const MultipleChoiceScore = ({gameData}) => {
       <>
         <div className = 'row'>
           <div className='col-sm-8 offset-md-2'>
-            <h3>can you identify...</h3>
+            <h3>Can you identify...</h3>
             <h1>{gameData.answer}</h1>
           </div>
         </div>
         
         <div className = 'row'>
           <div className='col-sm-8 offset-md-2'>
-            <h3>your score</h3>
+            <h3>Your Score</h3>
             <h1>{gameData.score}/{gameData.numQuestions}</h1>
           </div>
         </div>

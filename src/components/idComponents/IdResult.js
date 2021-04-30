@@ -11,7 +11,7 @@ const IdResult = () => {
 
   if(Object.keys(idResults).length === 0) {
     return (
-      <div>
+      <div className="text-center">
         <Spinner animation="border" />
         Loading...
       </div>
