@@ -104,7 +104,7 @@ const IdResult = () => {
                 </th>
                 <td>
                 <p><a href={idResults?.plantNetPageUrl} target="_blank" rel="noopener noreferrer">{idResults.plantNetPageUrl ? `${idResults?.scientificName} - PlantNet` : null} </a></p>
-                <p><a href={idResults?.wikiUrl} target="_blank" rel="noopener noreferrer">{idResults?.scientificName} - Wikipedia</a></p>
+                <p><a href={idResults?.wikiUrl} target="_blank" rel="noopener noreferrer">{idResults.wikiUrl ? `${idResults?.scientificName} - Wikipedia` : null}</a></p>
                 </td>
               </tr>
             </tbody>
@@ -119,7 +119,7 @@ const IdResult = () => {
           <h2>Your picture(s):</h2>
         </div>
       </div>
-      <div className="row">
+      <div className="row pb-5">
         <div className="col-md-1">
         </div>
         {generateUserImagesThumbnails(userData.userImageUrls)}

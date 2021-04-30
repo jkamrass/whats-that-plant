@@ -1,6 +1,4 @@
 const SearchImageThumbnail = ({image, type, imageNumber, deleteImage}) => {
-
-  debugger;
   const handleDeleteImageClick = () => {
     deleteImage(imageNumber)
   }
