@@ -1,9 +1,10 @@
 import { useSelector, useDispatch } from "react-redux"
-import { fetchTrefleInfoForId } from '../actions'
+import { fetchTrefleInfoForId, resetIdSearch } from '../actions'
 import Spinner from "react-bootstrap/Spinner";
 import {BOTH_FETCHES_FAILED} from '../actions';
 import NoResultsError from "./NoResultsError";
 import IdResultTable from "./IdResultTable";
+import {Link} from "react-router-dom";
 
 const IdResult = () => {
   const idResults = useSelector(state => state.plantIdResults);
@@ -26,23 +27,16 @@ const IdResult = () => {
     )
   }
 
-  // const callTrefle = () => {
-  //   dispatch(fetchTrefleInfoForId(idResults?.scientificName))
-  // }
-  // if(Object.keys(idResults).length !== 0) {
-  //   callTrefle();
-  // }
-
-  // if(idResults) {
-  //   dispatch(fetchTrefleInfoForId(encodeURIComponent(idResults?.scientificName)))
-  // }
-
   const generateUserImagesThumbnails = (userImages) => {
     return userImages.map((image) => (
       <div className="col-md-2">
         <img src={image} alt='' className='img-thumbnail'/>
       </div>
     ))
+  }
+
+  const handleLinkClick = () => {
+    dispatch(resetIdSearch());
   }
 
   return (
@@ -61,6 +55,15 @@ const IdResult = () => {
             {idResults?.commonName}
           </h1>
           <IdResultTable idResults={idResults}/>
+          <Link to='/id'>
+              <button className='btn btn-success mr-3' onClick={handleLinkClick}>New Search</button>
+          </Link>
+          <Link to='/'>
+              <button className='btn btn-success mr-3' onClick={handleLinkClick}>Home Page</button>
+          </Link>
+          <Link to='/quiz'>
+              <button className='btn btn-success mr-3' onClick={handleLinkClick}>Ready for a quiz?</button>
+          </Link>
         </div>
         <div className="col-md-5">
           <img src={idResults?.primaryImage} alt='Loading Image...' className='img-fluid rounded'/>
