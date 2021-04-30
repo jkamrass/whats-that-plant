@@ -15,6 +15,7 @@ const IdLocal = () => {
   const history = useHistory();
   
   const handleFileInput = (e) => {
+    debugger;
     //Makes sure there is actually a file. If someone closes the browse file without choosing a file it will still trigger this event.
     if (!e.target.files.length) {
       return;
@@ -35,6 +36,8 @@ const IdLocal = () => {
       image: e.target.files[0],
       imageUrl: URL.createObjectURL(e.target.files[0])
     })
+
+    e.target.value = null;
     //setImage();
     //setPreviewImage(URL.createObjectURL(e.target.files[0]))
   }
