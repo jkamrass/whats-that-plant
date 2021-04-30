@@ -19,7 +19,6 @@ const MultipleChoiceImage = ({answer, score, numQuestions, gameData, chooseAnswe
                   {plant.plantData.commonName === answer ? null: null}
                   <img className='img-fluid rounded shadow-lg' style={{border: showAnswer ? `5px solid ${plant.plantData.commonName === answer ? '#5cb85c' : '#d42f26'}`: null}} src={plant.plantData.imageUrl} alt={plant.plantData.commonName} onClick={chooseAnswer} onError={(e)=>{e.target.onerror = null; e.target.src="https://image.freepik.com/free-vector/something-went-wrong-neon-text_118419-43.jpg"}}/>
                 </span>
-                <p>{plant.plantData.commonName}</p>
               </div>
             )
           })}

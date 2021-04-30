@@ -65,7 +65,7 @@ const IdLocal = () => {
 
   const generateGetIdButton = () => (
     <div className='col-sm-6 offset-sm-3 text-center'>
-      <button className="btn btn-primary btn-lg" type="button" onClick={handleGetIdClick}>Get ID</button>
+      <button className="btn btn-success btn-lg" type="button" onClick={handleGetIdClick}>Get ID</button>
     </div>
   )
 
