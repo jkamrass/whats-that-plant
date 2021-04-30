@@ -67,6 +67,7 @@ export const fetchIdResultsLocal = (images, organsDisplayedinImages) => {
     
       //form.append('images', fs.createReadStream(images[i]));
       const idRequest = await axios.post(baseUrl, form);
+      console.log(idRequest);
       const matchScore = idRequest.data.results[0].score;
       const idToRetrieve = idRequest.data.results[0].species.scientificNameWithoutAuthor.toLowerCase().replace(' ', '-');
       const url = `https://trefle.io/api/v1/species/${idToRetrieve}?token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s`
@@ -113,6 +114,7 @@ export const fetchIdResultsUrl = (imageUrlsForPlant, organsDisplayedinImages) =>
       const organsPartOfRequestUrl = organsDisplayedinImages.reduce((organsUrlPortion, organ) => `${organsUrlPortion}&organs=${organ}`, '');
       const finalUrl = baseUrl+imagesPartOfRequestUrl+organsPartOfRequestUrl;
       const idRequest = await axios.get(finalUrl);
+      console.log(idRequest);
       const matchScore = idRequest.data.results[0].score;
       const idToRetrieve = idRequest.data.results[0].species.scientificNameWithoutAuthor.toLowerCase().replace(' ', '-');
       const url = `https://trefle.io/api/v1/species/${idToRetrieve}?token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s`
@@ -167,6 +169,7 @@ export const fetchTrefleGameInformation = async (numImagesToDisplay) => {
     const url = `https://trefle.io/api/v1/plants?filter_not%5Bcommon_name%5D=null&filter_not%5Bimage_url%5D=null&order%5Bsources_count%5D=desc&token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s&page=${page}`
     const request = await axios.get(url);
     plantsList = [...plantsList, ...request.data.data];
+    console.log(plantsList);
   }
 
   return {
@@ -175,6 +178,36 @@ export const fetchTrefleGameInformation = async (numImagesToDisplay) => {
       plants: plantsList,
       numImages: numImagesToDisplay 
     }
+  }
+}
+
+export const fetchTrefleGameInformationFaster = (numImagesToDisplay) => {
+  // Search for a plant by common name, scientific name, or other input field
+  // https://trefle.io/api/v1/plants?filter%5Bfamily_name%5D=Brassicaceae&token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s
+  //Brassicas: https://trefle.io/api/v1/plants?filter%5Bfamily_name%5D=Brassicaceae&token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s
+  //Edibles: https://trefle.io/api/v1/plants?filter_not%5Bedible_part%5D=null&token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s
+  const createPlantList = async (numImagesToDisplay) => {
+    let requestList = [];
+    for (let page = 1; page <= 5; page++) {
+      const url = `https://trefle.io/api/v1/plants?filter_not%5Bcommon_name%5D=null&filter_not%5Bimage_url%5D=null&order%5Bsources_count%5D=desc&token=1PYwkoMi5eekBlBShnMqKEeVEoHf-a_IhIxeGaG272s&page=${page}`
+      requestList.push(axios.get(url))
+      console.log(requestList);
+      debugger;
+    }
+    console.log(requestList);
+    const allData = await Promise.all(requestList)
+    const plantsList = allData.reduce((acc, onePageData) => [...acc, ...onePageData.data.data], [])
+    console.log(plantsList);
+    // plantsList = [...plantsList, ...request.data.data];
+    return {
+      plants: plantsList,
+      numImages: numImagesToDisplay
+    }
+  }
+
+  return {
+    type: FETCH_TREFLE_GAME_INFORMATION,
+    payload: createPlantList(numImagesToDisplay)
   }
 }
 
