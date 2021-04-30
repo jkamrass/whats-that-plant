@@ -4,7 +4,7 @@ const QuizMenu = () => {
   return (
     <>
       <Link to='/'>
-        <button className='btn btn-success btn-lg'>go back</button>
+        <button className='btn btn-success'>go back</button>
       </Link>
       <div className="row">
         <div className='col-sm-8 offset-md-2 text-center'>

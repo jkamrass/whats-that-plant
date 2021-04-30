@@ -1,7 +1,7 @@
 import { useParams, Switch, Route, Link } from 'react-router-dom';
 
 
-const BeginnerScoreCard = ({answer, score, numQuestions}) => {
+const MultipleChoiceScore = ({answer, score, numQuestions}) => {
   const writeGameMessage = (score) => {
     switch (true){
       case score === 10:
@@ -42,7 +42,7 @@ const BeginnerScoreCard = ({answer, score, numQuestions}) => {
       <div className = 'row'>
         <div className='col-sm-8 offset-md-2'>
           <h3>{writeGameMessage(score)}</h3>
-          <div className='border border-success'>
+          <div>
             <h1>Your score:</h1>
             <h1>{score}/{numQuestions}</h1>
           </div>
@@ -52,4 +52,4 @@ const BeginnerScoreCard = ({answer, score, numQuestions}) => {
   )
 }
 
-export default BeginnerScoreCard;
+export default MultipleChoiceScore;

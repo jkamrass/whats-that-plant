@@ -1,6 +1,6 @@
 import { useParams, Switch, Route, Link } from 'react-router-dom';
 import QuizMenu from './QuizMenu';
-import BeginnerQuiz from './quizzes/BeginnerQuiz';
+import MultipleChoiceQuiz from './quizzes/MultipleChoiceQuiz';
 import DragAndDropQuiz from './quizzes/DragAndDropQuiz';
 
 
@@ -18,7 +18,7 @@ const QuizContainer = () => {
               <DragAndDropQuiz/>
             </Route>
             <Route exact path='/quiz/greenthumb-advanced'>
-              <BeginnerQuiz/>
+              <MultipleChoiceQuiz/>
             </Route>
           </Switch>
         </div>
