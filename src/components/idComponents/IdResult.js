@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import Spinner from "react-bootstrap/Spinner";
 import {BOTH_FETCHES_FAILED} from '../../actions';
 import NoResultsError from "./NoResultsError";

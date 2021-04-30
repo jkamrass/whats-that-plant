@@ -1,14 +1,6 @@
-import { useDispatch } from "react-redux";
 import {Link} from "react-router-dom";
-import { resetIdSearch } from "../../actions";
 
 const NoResultsError = () => {
-  const dispatch = useDispatch();
-
-  const handleClick = () => {
-    dispatch(resetIdSearch());
-  }
-
   return (
     <div className="row">
       <div className="col-sm-6 offset-sm-3">
