@@ -31,7 +31,7 @@ const DragAndDropQuiz = () => {
   return (
     <>
       <Link to='/quiz'>
-        <button className='btn btn-success btn-lg'>go back</button>
+        <button className='btn btn-success'>go back</button>
       </Link>
       <h1>sprout's quiz</h1>
       <br></br>

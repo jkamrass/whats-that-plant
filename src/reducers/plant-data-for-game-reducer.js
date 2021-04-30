@@ -1,4 +1,4 @@
-import {FETCH_TREFLE_GAME_INFORMATION, RESET_GAME_INFORMATION, UPDATE_ANSWER} from "../actions/index";
+import {FETCH_TREFLE_GAME_INFORMATION, RESET_GAME_INFORMATION, UPDATE_ANSWER, UPDATE_SCORE_MULTIPLE_CHOICE} from "../actions/index";
 import _ from 'lodash';
 
 
@@ -39,24 +39,25 @@ const plantDataForGameReducer = (state = [], action) => {
         numQuestions: 0
       }
       return gameData;
+
+    case UPDATE_SCORE_MULTIPLE_CHOICE:
+      const newScore = {
+        score: action.payload ? state.score+1 : state.score,
+        numQuestions: state.numQuestions+1
+      }
+      return {...state, ...newScore}
     
     case UPDATE_ANSWER:
-      const plantDisplay = imageRandomizer(state.plants, 4);
+      const withoutLastAnswer = state.plants.filter(plant => plant.plantData.commonName !== action.payload)
+
+      const plantDisplay = imageRandomizer(withoutLastAnswer, 4);
     
       const newTurn = {
         answer: plantDisplay[randomValue(4)].plantData.commonName,
-        plantsDisplayed: plantDisplay,
-        score: state.score,
-        numQuestions: state.numQuestions + 1
+        plantsDisplayed: plantDisplay
       }
-      if (action.payload){
-        newTurn.score += 1;
-      }
-      
-      // setAnswer(gameData[randomValue2].plantData.name);
-      // setNumQuestions(numQuestions+1);
-      //add to score if payload true
-      return {...state, ...newTurn}
+
+      return {...state, ...newTurn, plants: withoutLastAnswer}
     
     case RESET_GAME_INFORMATION:
       return [];
