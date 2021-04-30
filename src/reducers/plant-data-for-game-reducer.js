@@ -1,4 +1,4 @@
-import {FETCH_TREFLE_GAME_INFORMATION, RESET_GAME_INFORMATION, UPDATE_ANSWER, UPDATE_SCORE_MULTIPLE_CHOICE} from "../actions/index";
+import {FETCH_TREFLE_GAME_INFORMATION, RESET_GAME_INFORMATION, GET_NEW_QUESTION, UPDATE_SCORE_MULTIPLE_CHOICE} from "../actions/index";
 import _ from 'lodash';
 
 
@@ -47,7 +47,7 @@ const plantDataForGameReducer = (state = [], action) => {
       }
       return {...state, ...newScore}
     
-    case UPDATE_ANSWER:
+    case GET_NEW_QUESTION:
       const withoutLastAnswer = state.plants.filter(plant => plant.plantData.commonName !== action.payload)
 
       const plantDisplay = imageRandomizer(withoutLastAnswer, 4);

@@ -1,4 +1,4 @@
-import { useParams, Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import IdMenu from './IdMenu';
 import IdLocal from './IdLocal';
 import IdUrl from './IdUrl';

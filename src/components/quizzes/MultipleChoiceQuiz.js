@@ -1,12 +1,10 @@
-import { QuizData } from './QuizData';
 import MultipleChoiceScore from './MultipleChoiceScore';
 import MultipleChoiceImage from './MultipleChoiceImage';
 import React, { useState, useEffect } from 'react';
-import {fetchTrefleGameInformation, resetGameInformation, updateAnswer, fetchTrefleGameInformationFaster, updateScoreMultipleChoice} from '../../actions/index';
+import {fetchTrefleGameInformation, resetGameInformation, getNewQuestion, updateScoreMultipleChoice} from '../../actions/index';
 import { useDispatch, useSelector } from 'react-redux';
 import Spinner from "react-bootstrap/Spinner";
-import { useParams, Switch, Route, Link } from 'react-router-dom';
-import { stubTrue } from 'lodash';
+import { Link } from 'react-router-dom';
 
 const MultipleChoiceQuiz = () => {
   const gameData = useSelector(state => state.plantDataForGame)
@@ -42,7 +40,7 @@ const MultipleChoiceQuiz = () => {
   }
 
   const nextQuestion = ()=>{
-    dispatch(updateAnswer(gameData.answer));
+    dispatch(getNewQuestion(gameData.answer));
     setShowAnswer(false);
   }
 

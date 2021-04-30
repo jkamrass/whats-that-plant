@@ -2,7 +2,7 @@ import axios from "axios";
 export const FETCH_TREFLE_GAME_INFORMATION = "FETCH_TREFLE_GAME_INFORMATION";
 export const UPDATE_USER_IMAGES = 'UPDATE_USER_IMAGES';
 export const FETCH_ID_RESULTS = 'FETCH_ID_RESULTS';
-export const UPDATE_ANSWER = 'UPDATE_ANSWER';
+export const GET_NEW_QUESTION = 'GET_NEW_QUESTION';
 export const TREFLE_FETCH_FAILED = "TREFLE_FETCH_FAILED";
 export const BOTH_FETCHES_FAILED = "BOTH_FETCHES_FAILED";
 export const RESET_ID_SEARCH = "RESET_ID_SEARCH";
@@ -183,9 +183,9 @@ export const updateScoreMultipleChoice = (correctAnswer) => {
 }
 
 
-export const updateAnswer = (lastAnswer) =>{
+export const getNewQuestion = (lastAnswer) =>{
   return {
-    type: UPDATE_ANSWER,
+    type: GET_NEW_QUESTION,
     payload: lastAnswer
   }
 };
