@@ -1,7 +1,4 @@
-import { useParams, Switch, Route, Link } from 'react-router-dom';
-
-
-const MultipleChoiceScore = ({answer, score, numQuestions}) => {
+const MultipleChoiceScore = ({gameData}) => {
   const writeGameMessage = (score) => {
     switch (true){
       case score === 10:
@@ -17,20 +14,20 @@ const MultipleChoiceScore = ({answer, score, numQuestions}) => {
     }
   }
   
-  if (numQuestions < 10) {
+  if (gameData.numQuestions < 10) {
     return (
       <>
         <div className = 'row'>
           <div className='col-sm-8 offset-md-2'>
-            <h3>can you identify...</h3>
-            <h1>{answer}</h1>
+            <h3>Can you identify...</h3>
+            <h1>{gameData.answer}</h1>
           </div>
         </div>
         
         <div className = 'row'>
           <div className='col-sm-8 offset-md-2'>
-            <h3>your score</h3>
-            <h1>{score}/{numQuestions}</h1>
+            <h3>Your Score</h3>
+            <h1>{gameData.score}/{gameData.numQuestions}</h1>
           </div>
         </div>
       </>
@@ -41,10 +38,10 @@ const MultipleChoiceScore = ({answer, score, numQuestions}) => {
     <>
       <div className = 'row'>
         <div className='col-sm-8 offset-md-2'>
-          <h3>{writeGameMessage(score)}</h3>
+          <h3>{writeGameMessage(gameData.score)}</h3>
           <div>
             <h1>Your score:</h1>
-            <h1>{score}/{numQuestions}</h1>
+            <h1>{gameData.score}/{gameData.numQuestions}</h1>
           </div>
         </div>
       </div>

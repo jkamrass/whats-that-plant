@@ -1,8 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import React, { useEffect, useState } from 'react';
-import { fetchIdResultsLocal, fetchPlantNetPlantIdLocal, updateUserImages, resetIdSearch } from '../actions/index';
+import { fetchIdResultsLocal, updateUserImages, resetIdSearch } from '../../actions/index';
 import { useHistory } from 'react-router-dom';
-import PreviewImage from './PreviewImage';
 import SearchImageThumbnail from './SearchImageThumbnail';
 
 
@@ -65,10 +64,9 @@ const IdLocal = () => {
 
   const generateGetIdButton = () => (
     <div className='col-sm-6 offset-sm-3 text-center'>
-      <button className="btn btn-primary btn-lg" type="button" onClick={handleGetIdClick}>Get ID</button>
+      <button className="btn btn-success btn-lg" type="button" onClick={handleGetIdClick}>Get ID</button>
     </div>
   )
-
 
   const generateSearchImageThumbnails = () => images.map((image, index) => <SearchImageThumbnail image={image.imageUrl} imageNumber={index} type={types[index]} deleteImage={deleteImage}/>);
 
@@ -97,7 +95,7 @@ const IdLocal = () => {
     <>
       <div className='row'>
         <div className='col-sm-8 offset-md-2'>
-          <h3>local upload</h3>
+          <h3>Local Upload</h3>
           <p>You can provide up to 5 images of one plant for the id. Please note, our tech works best with photos at least 600x600p</p>
         </div>
       </div>

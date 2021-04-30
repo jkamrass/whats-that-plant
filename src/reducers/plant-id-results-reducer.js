@@ -1,19 +1,8 @@
-import { BOTH_FETCHES_FAILED, FETCH_PLANT_NET_PLANT_IDENTIFICATION, FETCH_TREFLE_INFO_FOR_ID, TREFLE_FETCH_FAILED, RESET_ID_SEARCH } from '../actions/index';
+import { BOTH_FETCHES_FAILED, FETCH_ID_RESULTS, TREFLE_FETCH_FAILED, RESET_ID_SEARCH } from '../actions/index';
 
 const plantIdResultsReducer = (state={}, action) => {
   switch (action.type) {
-    case FETCH_PLANT_NET_PLANT_IDENTIFICATION:
-      //Grabs the first and most likely returned object (TODO: Could change to return multiple if there are multiple possible matches in the future)
-      const plantIdInfo = {
-        matchScore: action.payload.data.results[0].score,
-        scientificName: action.payload.data.results[0].species.scientificNameWithoutAuthor,
-        commonNames: action.payload.data.results[0].species.commonNames,
-        family: action.payload.data.results[0].species.family.scientificNameWithoutAuthor,
-        genus: action.payload.data.results[0].species.genus.scientificNameWithoutAuthor
-      }
-      return plantIdInfo;
-
-    case FETCH_TREFLE_INFO_FOR_ID:
+    case FETCH_ID_RESULTS:
       console.log(action.payload);
       //Tests to see if no errors came up with either of the fetch requests
       if (!action.payload.error) {

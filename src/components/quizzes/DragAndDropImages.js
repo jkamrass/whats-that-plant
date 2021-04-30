@@ -1,18 +1,12 @@
-import React, { Component, useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState} from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { QuizData } from './QuizData';
 import _ from 'lodash';
-import Spinner from "react-bootstrap/Spinner";
-import { useDispatch, useSelector } from 'react-redux';
-import {fetchTrefleGameInformation, updateAnswer, updatePlantsDisplayed} from '../../actions/index';
-import { useParams, Switch, Route, Link } from 'react-router-dom';
 
 
-const DragAndDropImages = ({gameData, newGame}) => {
+const DragAndDropImages = ({gameData}) => {
 
   const [choices, setChoices] = useState(_.shuffle(gameData.plantsDisplayed));
-  const [answers, setAnswers] = useState(_.shuffle(gameData.plantsDisplayed));
+  const [answers] = useState(_.shuffle(gameData.plantsDisplayed));
   const [score, setScore] = useState(0);
   const [submitted, setSubmitted] = useState(false);
 
@@ -44,11 +38,6 @@ const DragAndDropImages = ({gameData, newGame}) => {
           total: answers.length,
           byQuestion: rightAnswers
         })
-  }
-
-  const newSetClickHandler = () => {
-    setSubmitted(false);
-    newGame(choices)
   }
 
   return (
@@ -93,7 +82,7 @@ const DragAndDropImages = ({gameData, newGame}) => {
       <div className='row'>
         <div className='col-sm-4 offset-md-4 text-center'>
           {submitted ? null : <button className='btn btn-success btn-lg' onClick={submitQuiz}>Submit</button>}
-          {score ? <h3>your score: {score.correct}/{score.total}</h3> : null}
+          {score ? <h3>Your Score: {score.correct}/{score.total}</h3> : null}
         </div>
       </div>
       </>

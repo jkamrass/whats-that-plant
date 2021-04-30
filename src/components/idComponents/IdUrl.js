@@ -1,6 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import React, { useEffect, useState } from 'react';
-import { fetchPlantNetPlantIdUrl, fetchIdResultsUrl, updateUserImages, resetIdSearch } from '../actions'
+import { fetchIdResultsUrl, updateUserImages, resetIdSearch } from '../../actions'
 import { useHistory } from 'react-router-dom';
 import PreviewImage from './PreviewImage';
 import { useForm } from "react-hook-form";
@@ -32,7 +32,7 @@ const IdUrl = () => {
     history.push('/id/result');
   }
 
-  const addImage = (data) => {
+  const addImage = () => {
     setImages(images.concat(watch("Image")));
     setTypes(types.concat(watch("plantPart")))
     setValue("Image", '');
@@ -83,7 +83,7 @@ const IdUrl = () => {
     <>
       <div className='row'>
         <div className='col-sm-8 offset-md-2'>
-          <h3>provide url(s) for upload</h3>
+          <h3>Provide Url(s) for Upload</h3>
           <p>You can provide up to 5 images of one plant for the id. Please note, our tech works best with photos at least 600x600p</p>
         </div>
       </div>

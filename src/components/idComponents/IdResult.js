@@ -1,6 +1,6 @@
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import Spinner from "react-bootstrap/Spinner";
-import {BOTH_FETCHES_FAILED} from '../actions';
+import {BOTH_FETCHES_FAILED} from '../../actions';
 import NoResultsError from "./NoResultsError";
 import IdResultTable from "./IdResultTable";
 import {Link} from "react-router-dom";
@@ -11,7 +11,7 @@ const IdResult = () => {
 
   if(Object.keys(idResults).length === 0) {
     return (
-      <div>
+      <div className="text-center">
         <Spinner animation="border" />
         Loading...
       </div>
